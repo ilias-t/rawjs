@@ -1,0 +1,52 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "extends": [
+    "airbnb-base",
+    "plugin:flowtype/recommended"
+  ],
+  "env": {
+    "es6": true,
+    "node": true,
+    "mocha": true
+  },
+  "rules": {
+    "arrow-body-style": 0,
+    "chai-expect/missing-assertion": 2,
+    "chai-expect/no-inner-compare": 1,
+    "comma-dangle": ["error", "only-multiline"],
+    "consistent-return": 0,
+    "curly": ["error", "all"],
+    "flowtype/space-after-type-colon": [2, "always", { "allowLineBreak": true } ],
+    "flowtype/space-before-type-colon": [2, "never"],
+    "generator-star-spacing": 0,
+    "global-require": 0,
+    "import/newline-after-import": 0,
+    "import/no-extraneous-dependencies": 0,
+    "import/no-named-as-default-member": 0,
+    "import/no-unresolved": 0,
+    "import/prefer-default-export": 0,
+    "max-len": ["error", 90],
+    "no-console": "error",
+    "no-continue": 0,
+    "no-duplicate-imports": 0,
+    "no-param-reassign": [2, { "props": false }],
+    "no-underscore-dangle": 0,
+    "no-unused-vars": [2, { "args": "none" }],
+    "no-use-before-define": [2, "nofunc"],
+    "no-warning-comments": ["error", { "terms": ["todo"] }],
+    "prefer-object-spread/prefer-object-spread": 2,
+    "require-yield": 0,
+    "semi": [2, "never"],
+    "space-before-function-paren": 0,
+    "valid-jsdoc": ["error", { requireReturn: false, requireParamDescription: false, requireReturnDescription: false }],
+    "vars-on-top": 0
+  },
+  "plugins": [
+    "chai-expect",
+    "flowtype",
+    "prefer-object-spread"
+  ]
+}

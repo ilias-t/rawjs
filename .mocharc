@@ -1,0 +1,5 @@
+./src/**/spec.js
+--require babel-core/register
+--reporter spec
+--ui bdd
+--slow 5
