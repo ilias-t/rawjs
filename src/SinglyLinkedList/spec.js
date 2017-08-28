@@ -4,7 +4,8 @@ import SinglyLinkedList from './index'
 describe('SinglyLinkedList', () => {
   let list
   beforeEach(() => {
-    list = new SinglyLinkedList(['a', 'b', 'c', 'd', 'e'])
+    list = new SinglyLinkedList()
+    list.insert('a').insert('b').insert('c')
   })
 
   describe('length', () => {
@@ -37,12 +38,18 @@ describe('SinglyLinkedList', () => {
       list.insert('Ω')
       expect(list.searchAt(list.lenght - 1)).to.equal('Ω')
     })
+    it('returns itself to allow for method chaining', () => {
+      expect(list.insert('d')).to.equal(list)
+    })
   })
 
   describe('#insertFirst', () => {
     it('inserts a node at the beginning of the list', () => {
       list.insert('α')
       expect(list.searchAt(0)).to.equal('α')
+    })
+    it('returns itself to allow for method chaining', () => {
+      expect(list.insertFirst('α')).to.equal(list)
     })
   })
 
@@ -54,6 +61,15 @@ describe('SinglyLinkedList', () => {
     })
     it('returns null if nothing is found to delete', () => {
       expect(list.delete('!')).to.equal(null)
+    })
+    it('returns itself to allow for method chaining', () => {
+      expect(list.delete('!')).to.equal(list)
+    })
+  })
+
+  describe('#toArray', () => {
+    it('returns an array that represents the list', () => {
+      expect(list.toArray()).to.equal(['a', 'b', 'c'])
     })
   })
 })
