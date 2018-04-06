@@ -1,11 +1,11 @@
 /*
- * List
+ * LinkedList
  * @flow
  */
 
 import Node from '../Node'
 
-class List {
+class LinkedList {
   head: ?Node;
 
   constructor() {
@@ -27,4 +27,4 @@ class List {
   }
 }
 
-export default List
+export default LinkedList
