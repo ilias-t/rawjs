@@ -2,8 +2,8 @@
  * Project Root
  */
 
-import SinglyLinkedList from './SinglyLinkedList'
+import List from './List'
 
 export default {
-  SinglyLinkedList
+  List
 }

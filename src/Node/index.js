@@ -1,9 +1,12 @@
 /*
  * Node
+ * @flow
  */
 
 class Node {
-  constructor(data) {
+  data: any;
+  next: ?Node;
+  constructor(data: any) {
     this.data = data
     this.next = null
   }
