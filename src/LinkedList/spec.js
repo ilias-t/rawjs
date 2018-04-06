@@ -1,16 +1,16 @@
 import { expect } from 'chai'
-import List from './index'
+import LinkedList from './index'
 
-describe('List', () => {
+describe('LinkedList', () => {
   let list
   beforeEach(() => {
-    list = new List()
+    list = new LinkedList()
     list.insert('a').insert('b').insert('c')
   })
 
   describe('length', () => {
     it('returns the number of nodes in the list', () => {
-      const emptyList = new List()
+      const emptyList = new LinkedList()
       expect(emptyList.length).to.equal(0)
       expect(list.length).to.equal(5)
     })
