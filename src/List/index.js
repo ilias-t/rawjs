@@ -1,5 +1,5 @@
 /*
- * Singly Linked List
+ * List
  * @flow
  */
 

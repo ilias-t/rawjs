@@ -1,7 +1,7 @@
 {
   "name": "raw",
   "version": "0.1.0",
-  "description": "Datastructures in JS",
+  "description": "Data structures in JS",
   "main": "./dist/index.js",
   "author": "Ilias Tsangaris",
   "license": "MIT",
