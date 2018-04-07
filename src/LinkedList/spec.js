@@ -19,15 +19,15 @@ describe('LinkedList', () => {
     });
   });
 
-  // describe('#search', () => {
-  //   it('return the position of the node with data matching', () => {
-  //     expect(list.search('a')).to.equal(0);
-  //     expect(list.search('b')).to.equal(1);
-  //   });
-  //   it('returns null if nothing is found', () => {
-  //     expect(list.search('!')).to.equal(null);
-  //   });
-  // });
+  describe.skip('#search', () => {
+    it('return the position of the node with data matching', () => {
+      expect(list.search('a')).to.equal(0);
+      expect(list.search('b')).to.equal(1);
+    });
+    it('returns null if nothing is found', () => {
+      expect(list.search('!')).to.equal(null);
+    });
+  });
 
   describe('#searchAt', () => {
     it('returns the data contained at a specified position in the list', () => {
@@ -46,33 +46,33 @@ describe('LinkedList', () => {
     });
   });
 
-  // describe('#insertFirst', () => {
-  //   it('inserts a node at the beginning of the list', () => {
-  //     list.insert('α');
-  //     expect(list.searchAt(0)).to.equal('α');
-  //   });
-  //   it('returns itself to allow for method chaining', () => {
-  //     expect(list.insertFirst('α')).to.equal(list);
-  //   });
-  // });
+  describe.skip('#insertFirst', () => {
+    it('inserts a node at the beginning of the list', () => {
+      list.insert('α');
+      expect(list.searchAt(0)).to.equal('α');
+    });
+    it('returns itself to allow for method chaining', () => {
+      expect(list.insertFirst('α')).to.equal(list);
+    });
+  });
 
-  // describe('#delete', () => {
-  //   it('removes a specified element from the list & returns it', () => {
-  //     const listLength = list.length;
-  //     expect(list.delete('a')).to.equal('a');
-  //     expect(list.length).to.equal(listLength - 1);
-  //   });
-  //   it('returns null if nothing is found to delete', () => {
-  //     expect(list.delete('!')).to.equal(null);
-  //   });
-  //   it('returns itself to allow for method chaining', () => {
-  //     expect(list.delete('!')).to.equal(list);
-  //   });
-  // });
+  describe.skip('#delete', () => {
+    it('removes a specified element from the list & returns it', () => {
+      const listLength = list.length;
+      expect(list.delete('a')).to.equal('a');
+      expect(list.length).to.equal(listLength - 1);
+    });
+    it('returns null if nothing is found to delete', () => {
+      expect(list.delete('!')).to.equal(null);
+    });
+    it('returns itself to allow for method chaining', () => {
+      expect(list.delete('!')).to.equal(list);
+    });
+  });
 
-  // describe('#toArray', () => {
-  //   it('returns an array that represents the list', () => {
-  //     expect(list.toArray()).to.equal(['a', 'b', 'c']);
-  //   });
-  // });
+  describe.skip('#toArray', () => {
+    it('returns an array that represents the list', () => {
+      expect(list.toArray()).to.equal(['a', 'b', 'c']);
+    });
+  });
 });

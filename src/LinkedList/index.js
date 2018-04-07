@@ -1,13 +1,11 @@
-/**
+/*
  * LinkedList
  * @flow
  */
 
+import _ from 'lodash';
 import Node from '../Node';
 
-/**
- * LinkedList
- */
 class LinkedList {
   head: ?Node;
   length: number;
@@ -40,7 +38,7 @@ class LinkedList {
    * Searches for the item located at the provided index
    */
   searchAt = (place: number): any => {
-    if (typeof place !== 'number') {
+    if (!_.isNumber(place)) {
       throw new Error('Provided index is invalid type');
     }
     if (place < 0 || place > this.length) {
