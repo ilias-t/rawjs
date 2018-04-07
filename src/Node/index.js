@@ -3,6 +3,9 @@
  * @flow
  */
 
+/**
+ * Node
+ */
 class Node {
   data: any;
   next: ?Node;

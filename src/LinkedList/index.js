@@ -1,10 +1,13 @@
-/*
+/**
  * LinkedList
  * @flow
  */
 
 import Node from '../Node';
 
+/**
+ * LinkedList
+ */
 class LinkedList {
   head: ?Node;
   length: number;
@@ -33,6 +36,9 @@ class LinkedList {
     return this.insert(data, node.next);
   };
 
+  /**
+   * Searches for the item located at the provided index
+   */
   searchAt = (place: number): any => {
     if (typeof place !== 'number') {
       throw new Error('Provided index is invalid type');

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <base data-ice="baseUrl" href="../../../">
-  <title data-ice="title">src/Node/spec.js | raw</title>
+  <title data-ice="title">src/LinkedList/index.js | raw</title>
   <link type="text/css" rel="stylesheet" href="css/style.css">
   <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
   <script src="script/prettify/prettify.js"></script>
@@ -35,22 +35,66 @@
 </div>
 </nav>
 
-<div class="content" data-ice="content"><h1 data-ice="title">src/Node/spec.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { expect } from &apos;chai&apos;;
-import Node from &apos;./index&apos;;
+<div class="content" data-ice="content"><h1 data-ice="title">src/LinkedList/index.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">/**
+ * LinkedList
+ * @flow
+ */
 
-describe(&apos;Node&apos;, () =&gt; {
-  let node;
-  beforeEach(() =&gt; {
-    node = new Node(true);
-  });
-  it(&apos;can take a data&apos;, () =&gt; {
-    expect(node).to.have.property(&apos;data&apos;, true);
-  });
-  it(&apos;has a next node&apos;, () =&gt; {
-    expect(node).to.have.property(&apos;next&apos;, null);
-  });
-});
+import Node from &apos;../Node&apos;;
+
+/**
+ * LinkedList
+ */
+class LinkedList {
+  head: ?Node;
+  length: number;
+
+  constructor() {
+    this.head = null;
+    this.length = 0;
+  }
+
+  /**
+   * Inserts an item into the list
+   */
+  insert = (data: any, node: ?Node = this.head) =&gt; {
+    if (node == null) {
+      this.head = new Node(data);
+      this.length += 1;
+      return this;
+    }
+
+    if (node.next == null) {
+      node.next = new Node(data);
+      this.length += 1;
+      return this;
+    }
+    // Recursively insert
+    return this.insert(data, node.next);
+  };
+
+  /**
+   * Searches for the item located at the provided index
+   */
+  searchAt = (place: number): any =&gt; {
+    if (typeof place !== &apos;number&apos;) {
+      throw new Error(&apos;Provided index is invalid type&apos;);
+    }
+    if (place &lt; 0 || place &gt; this.length) {
+      throw new Error(&apos;Provided index is out of bounds&apos;);
+    }
+
+    let current = this.head;
+    for (let i = 0; i &lt; place; i++) {
+      // Walk the list
+      current = current &amp;&amp; current.next;
+    }
+    return current &amp;&amp; current.data;
+  };
+}
+
+export default LinkedList;
 </code></pre>
 
 </div>

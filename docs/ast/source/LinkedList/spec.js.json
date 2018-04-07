@@ -74,6 +74,7 @@
               },
               "name": "expect"
             },
+            "importKind": null,
             "local": {
               "type": "Identifier",
               "start": 9,
@@ -93,6 +94,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 23,
@@ -162,6 +164,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 54,
@@ -1423,10 +1426,10 @@
                                                     }
                                                   },
                                                   "extra": {
-                                                    "rawValue": 5,
-                                                    "raw": "5"
+                                                    "rawValue": 3,
+                                                    "raw": "3"
                                                   },
-                                                  "value": 5
+                                                  "value": 3
                                                 }
                                               ]
                                             }
@@ -3683,9 +3686,9 @@
                                                                     "line": 42,
                                                                     "column": 38
                                                                   },
-                                                                  "identifierName": "lenght"
+                                                                  "identifierName": "length"
                                                                 },
-                                                                "name": "lenght"
+                                                                "name": "length"
                                                               },
                                                               "computed": false
                                                             },
@@ -9734,7 +9737,7 @@
         "binop": null,
         "updateContext": null
       },
-      "value": 5,
+      "value": 3,
       "start": 441,
       "end": 442,
       "loc": {
@@ -14356,7 +14359,7 @@
         "postfix": false,
         "binop": null
       },
-      "value": "lenght",
+      "value": "length",
       "start": 1130,
       "end": 1136,
       "loc": {

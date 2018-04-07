@@ -74,6 +74,7 @@
               },
               "name": "expect"
             },
+            "importKind": null,
             "local": {
               "type": "Identifier",
               "start": 9,
@@ -93,6 +94,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 23,
@@ -162,6 +164,7 @@
             }
           }
         ],
+        "importKind": "value",
         "source": {
           "type": "StringLiteral",
           "start": 48,
