@@ -7,6 +7,8 @@ Data structures for Javascript.
 ## Data structures
 1. [List](#list)
 
+Most methods can be chained together.
+
 ### List
 A singly linked list
 
