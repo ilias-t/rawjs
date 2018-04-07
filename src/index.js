@@ -2,8 +2,8 @@
  * Project Root
  */
 
-import LinkedList from './LinkedList'
+import LinkedList from './LinkedList';
 
 export default {
-  LinkedList
-}
+  LinkedList,
+};
