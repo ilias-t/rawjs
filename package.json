@@ -15,7 +15,7 @@
     "prepublish": "npm run build",
     "test": "mocha --opts .mocharc",
     "test:watch": "npm run test -- --watch",
-    "verification": "npm run lint && flow"
+    "verification": "npm run lint && npm run test && flow"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
