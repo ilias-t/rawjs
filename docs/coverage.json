@@ -1,0 +1,21 @@
+{
+  "coverage": "80%",
+  "expectCount": 10,
+  "actualCount": 8,
+  "files": {
+    "src/LinkedList/index.js": {
+      "expectCount": 6,
+      "actualCount": 5,
+      "undocumentLines": [
+        15
+      ]
+    },
+    "src/Node/index.js": {
+      "expectCount": 4,
+      "actualCount": 3,
+      "undocumentLines": [
+        12
+      ]
+    }
+  }
+}

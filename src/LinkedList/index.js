@@ -1,30 +1,59 @@
-/*
+/**
  * LinkedList
  * @flow
  */
 
-import Node from '../Node'
+import Node from '../Node';
 
+/**
+ * LinkedList
+ */
 class LinkedList {
   head: ?Node;
+  length: number;
 
   constructor() {
-    this.head = null
+    this.head = null;
+    this.length = 0;
   }
 
+  /**
+   * Inserts an item into the list
+   */
   insert = (data: any, node: ?Node = this.head) => {
     if (node == null) {
-      this.head = new Node(data)
-      // Allows for chaining
-      return this
+      this.head = new Node(data);
+      this.length += 1;
+      return this;
     }
+
     if (node.next == null) {
-      node.next = new Node(data)
-      return this
+      node.next = new Node(data);
+      this.length += 1;
+      return this;
     }
     // Recursively insert
-    return this.insert(data, node.next)
-  }
+    return this.insert(data, node.next);
+  };
+
+  /**
+   * Searches for the item located at the provided index
+   */
+  searchAt = (place: number): any => {
+    if (typeof place !== 'number') {
+      throw new Error('Provided index is invalid type');
+    }
+    if (place < 0 || place > this.length) {
+      throw new Error('Provided index is out of bounds');
+    }
+
+    let current = this.head;
+    for (let i = 0; i < place; i++) {
+      // Walk the list
+      current = current && current.next;
+    }
+    return current && current.data;
+  };
 }
 
-export default LinkedList
+export default LinkedList;
