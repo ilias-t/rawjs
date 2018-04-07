@@ -15,7 +15,7 @@ describe('LinkedList', () => {
     it('returns the number of nodes in the list', () => {
       const emptyList = new LinkedList();
       expect(emptyList.length).to.equal(0);
-      expect(list.length).to.equal(5);
+      expect(list.length).to.equal(3);
     });
   });
 
@@ -39,7 +39,7 @@ describe('LinkedList', () => {
   describe('#insert', () => {
     it('inserts a node at the end of the list', () => {
       list.insert('Ω');
-      expect(list.searchAt(list.lenght - 1)).to.equal('Ω');
+      expect(list.searchAt(list.length - 1)).to.equal('Ω');
     });
     it('returns itself to allow for method chaining', () => {
       expect(list.insert('d')).to.equal(list);

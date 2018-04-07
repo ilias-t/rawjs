@@ -7,23 +7,46 @@ import Node from '../Node';
 
 class LinkedList {
   head: ?Node;
+  length: number;
 
   constructor() {
     this.head = null;
+    this.length = 0;
   }
 
+  /**
+   * Inserts an item into the list
+   */
   insert = (data: any, node: ?Node = this.head) => {
     if (node == null) {
       this.head = new Node(data);
-      // Allows for chaining
+      this.length += 1;
       return this;
     }
+
     if (node.next == null) {
       node.next = new Node(data);
+      this.length += 1;
       return this;
     }
     // Recursively insert
     return this.insert(data, node.next);
+  };
+
+  searchAt = (place: number): any => {
+    if (typeof place !== 'number') {
+      throw new Error('Provided index is invalid type');
+    }
+    if (place < 0 || place > this.length) {
+      throw new Error('Provided index is out of bounds');
+    }
+
+    let current = this.head;
+    for (let i = 0; i < place; i++) {
+      // Walk the list
+      current = current && current.next;
+    }
+    return current && current.data;
   };
 }
 
