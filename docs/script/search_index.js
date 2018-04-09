@@ -300,10 +300,46 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
+    "src/linkedlist/index.js~linkedlist#_checkisinbounds",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-_checkIsInBounds",
+    "src/LinkedList/index.js~LinkedList#_checkIsInBounds",
+    "member"
+  ],
+  [
+    "src/linkedlist/index.js~linkedlist#_checkisnumber",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-_checkIsNumber",
+    "src/LinkedList/index.js~LinkedList#_checkIsNumber",
+    "member"
+  ],
+  [
     "src/linkedlist/index.js~linkedlist#constructor",
     "class/src/LinkedList/index.js~LinkedList.html#instance-constructor-constructor",
     "src/LinkedList/index.js~LinkedList#constructor",
     "method"
+  ],
+  [
+    "src/linkedlist/index.js~linkedlist#delete",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-delete",
+    "src/LinkedList/index.js~LinkedList#delete",
+    "member"
+  ],
+  [
+    "src/linkedlist/index.js~linkedlist#deleteat",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-deleteAt",
+    "src/LinkedList/index.js~LinkedList#deleteAt",
+    "member"
+  ],
+  [
+    "src/linkedlist/index.js~linkedlist#findat",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-findAt",
+    "src/LinkedList/index.js~LinkedList#findAt",
+    "member"
+  ],
+  [
+    "src/linkedlist/index.js~linkedlist#get",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-get",
+    "src/LinkedList/index.js~LinkedList#get",
+    "member"
   ],
   [
     "src/linkedlist/index.js~linkedlist#head",
@@ -318,15 +354,33 @@ window.esdocSearchIndex = [
     "member"
   ],
   [
+    "src/linkedlist/index.js~linkedlist#insertat",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-insertAt",
+    "src/LinkedList/index.js~LinkedList#insertAt",
+    "member"
+  ],
+  [
+    "src/linkedlist/index.js~linkedlist#insertfirst",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-insertFirst",
+    "src/LinkedList/index.js~LinkedList#insertFirst",
+    "member"
+  ],
+  [
     "src/linkedlist/index.js~linkedlist#length",
     "class/src/LinkedList/index.js~LinkedList.html#instance-member-length",
     "src/LinkedList/index.js~LinkedList#length",
     "member"
   ],
   [
-    "src/linkedlist/index.js~linkedlist#searchat",
-    "class/src/LinkedList/index.js~LinkedList.html#instance-member-searchAt",
-    "src/LinkedList/index.js~LinkedList#searchAt",
+    "src/linkedlist/index.js~linkedlist#positionof",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-positionOf",
+    "src/LinkedList/index.js~LinkedList#positionOf",
+    "member"
+  ],
+  [
+    "src/linkedlist/index.js~linkedlist#toarray",
+    "class/src/LinkedList/index.js~LinkedList.html#instance-member-toArray",
+    "src/LinkedList/index.js~LinkedList#toArray",
     "member"
   ],
   [
@@ -348,15 +402,15 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/node/index.js~node#data",
-    "class/src/Node/index.js~Node.html#instance-member-data",
-    "src/Node/index.js~Node#data",
-    "member"
-  ],
-  [
     "src/node/index.js~node#next",
     "class/src/Node/index.js~Node.html#instance-member-next",
     "src/Node/index.js~Node#next",
+    "member"
+  ],
+  [
+    "src/node/index.js~node#value",
+    "class/src/Node/index.js~Node.html#instance-member-value",
+    "src/Node/index.js~Node#value",
     "member"
   ],
   [

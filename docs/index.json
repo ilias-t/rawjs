@@ -567,7 +567,7 @@
     "__docId__": 48,
     "kind": "file",
     "name": "src/LinkedList/index.js",
-    "content": "/**\n * LinkedList\n * @flow\n */\n\nimport Node from '../Node';\n\n/**\n * LinkedList\n */\nclass LinkedList {\n  head: ?Node;\n  length: number;\n\n  constructor() {\n    this.head = null;\n    this.length = 0;\n  }\n\n  /**\n   * Inserts an item into the list\n   */\n  insert = (data: any, node: ?Node = this.head) => {\n    if (node == null) {\n      this.head = new Node(data);\n      this.length += 1;\n      return this;\n    }\n\n    if (node.next == null) {\n      node.next = new Node(data);\n      this.length += 1;\n      return this;\n    }\n    // Recursively insert\n    return this.insert(data, node.next);\n  };\n\n  /**\n   * Searches for the item located at the provided index\n   */\n  searchAt = (place: number): any => {\n    if (typeof place !== 'number') {\n      throw new Error('Provided index is invalid type');\n    }\n    if (place < 0 || place > this.length) {\n      throw new Error('Provided index is out of bounds');\n    }\n\n    let current = this.head;\n    for (let i = 0; i < place; i++) {\n      // Walk the list\n      current = current && current.next;\n    }\n    return current && current.data;\n  };\n}\n\nexport default LinkedList;\n",
+    "content": "/*\n * LinkedList\n * @flow\n */\n\nimport { isNumber } from 'lodash';\nimport { Node } from '../';\n\nclass LinkedList {\n  head: ?Node;\n  length: number;\n\n  constructor() {\n    this.head = null;\n    this.length = 0;\n  }\n\n  /**\n   * Inserts the value into a node at the end of the list, recursively.\n   */\n  insert = (value: any, node: ?Node = this.head): LinkedList => {\n    if (node == null) {\n      this.head = new Node(value);\n      this.length += 1;\n      return this;\n    }\n\n    if (node.next == null) {\n      node.next = new Node(value);\n      this.length += 1;\n      return this;\n    }\n\n    return this.insert(value, node.next);\n  };\n\n  /**\n   * Inserts the value into a node with a specific position in the list.\n   */\n  insertAt = (value: any, position: number): LinkedList => {\n    this._checkIsInBounds(position);\n    // new Node, to be inserted\n    const node = new Node(value);\n\n    if (position === 0) {\n      node.next = this.head;\n      this.head = node;\n    } else {\n      const prev = this.findAt(position - 1);\n      const { next } = prev;\n      node.next = next;\n      prev.next = node;\n    }\n    this.length += 1;\n    return this;\n  };\n\n  /**\n   * Inserts the value into a node at the beginning of the list, as the head.\n   */\n  insertFirst = (value: any): LinkedList => {\n    return this.insertAt(value, 0);\n  };\n\n  /**\n   * Returns the first node with a value matching that provided.\n   */\n  get = (value: any): ?Node => {\n    let current = this.head;\n    for (let i = 0; i < this.length; i++) {\n      if (current && current.value === value) {\n        return current;\n      }\n      current = current && current.next;\n    }\n    return null;\n  };\n\n  /**\n   * Finds the node located at the provided position.\n   */\n  findAt = (position: number): any => {\n    this._checkIsInBounds(position);\n\n    let current = this.head;\n    for (let i = 0; i < position; i++) {\n      current = current && current.next;\n    }\n    return current;\n  };\n\n  /**\n   * Search the list for the first node containing the value provided using a strict\n   * equality comparison and return the index.\n   */\n  positionOf = (value: any): number => {\n    let current = this.head;\n    for (let i = 0; i < this.length; i++) {\n      if (current && current.value === value) {\n        return i;\n      }\n      current = current && current.next;\n    }\n    return -1;\n  };\n\n  /**\n   * Deletes the the first node with the value provided, returning the value deleted.\n   */\n  deleteAt = (position: number): any => {\n    if (this.head == null) {\n      // Cannot delete from an empty list\n      return null;\n    }\n\n    if (position === 0) {\n      const target = this.head;\n      this.head = target.next;\n      this.length -= 1;\n      return target.value;\n    }\n\n    this._checkIsInBounds(position);\n    const prev = this.findAt(position - 1);\n    // Find item to delete and set the previous node's next to the deleted node's next\n    const target = prev.next;\n    prev.next = target.next;\n    this.length -= 1;\n    return target.value;\n  };\n\n  /**\n   * Deletes the the first node with the value provided, returning the value deleted.\n   */\n  delete = (value: any): any => {\n    try {\n      const position = this.positionOf(value);\n      return this.deleteAt(position);\n    } catch (e) {\n      return null;\n    }\n  };\n\n  toArray = (): any[] => {\n    const array = [];\n    if (this.head == null) {\n      return array;\n    }\n    let current = this.head;\n    for (let i = 0; i < this.length; i++) {\n      array.push(current.value);\n      current = current.next;\n    }\n    return array;\n  };\n\n  _checkIsNumber = (num: ?number): boolean => {\n    if (!isNumber(num)) {\n      throw new Error('Provided position is invalid');\n    }\n    return true;\n  };\n\n  _checkIsInBounds = (num: number): boolean => {\n    this._checkIsNumber(num);\n    if (num >= this.length || num < 0) {\n      throw new Error('Provided position is out of bounds');\n    }\n    return true;\n  };\n}\n\nexport default LinkedList;\n",
     "static": true,
     "longname": "/Users/itsangaris/dev/rawjs/src/LinkedList/index.js",
     "access": "public",
@@ -585,8 +585,9 @@
     "export": true,
     "importPath": "raw/src/LinkedList/index.js",
     "importStyle": "LinkedList",
-    "description": "LinkedList",
-    "lineNumber": 11,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
     "interface": false
   },
   {
@@ -598,7 +599,7 @@
     "longname": "src/LinkedList/index.js~LinkedList#head",
     "access": "public",
     "description": "",
-    "lineNumber": 12,
+    "lineNumber": 10,
     "type": {
       "nullable": null,
       "types": [
@@ -617,7 +618,7 @@
     "longname": "src/LinkedList/index.js~LinkedList#length",
     "access": "public",
     "description": "",
-    "lineNumber": 13,
+    "lineNumber": 11,
     "type": {
       "nullable": null,
       "types": [
@@ -638,7 +639,7 @@
     "longname": "src/LinkedList/index.js~LinkedList#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 15,
+    "lineNumber": 13,
     "undocument": true
   },
   {
@@ -649,8 +650,8 @@
     "static": false,
     "longname": "src/LinkedList/index.js~LinkedList#insert",
     "access": "public",
-    "description": "Inserts an item into the list",
-    "lineNumber": 23,
+    "description": "Inserts the value into a node at the end of the list, recursively.",
+    "lineNumber": 21,
     "type": {
       "types": [
         "*"
@@ -660,13 +661,13 @@
   {
     "__docId__": 59,
     "kind": "member",
-    "name": "searchAt",
+    "name": "insertAt",
     "memberof": "src/LinkedList/index.js~LinkedList",
     "static": false,
-    "longname": "src/LinkedList/index.js~LinkedList#searchAt",
+    "longname": "src/LinkedList/index.js~LinkedList#insertAt",
     "access": "public",
-    "description": "Searches for the item located at the provided index",
-    "lineNumber": 42,
+    "description": "Inserts the value into a node with a specific position in the list.",
+    "lineNumber": 40,
     "type": {
       "types": [
         "*"
@@ -674,10 +675,157 @@
     }
   },
   {
-    "__docId__": 60,
+    "__docId__": 62,
+    "kind": "member",
+    "name": "insertFirst",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#insertFirst",
+    "access": "public",
+    "description": "Inserts the value into a node at the beginning of the list, as the head.",
+    "lineNumber": 61,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 63,
+    "kind": "member",
+    "name": "get",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#get",
+    "access": "public",
+    "description": "Returns the first node with a value matching that provided.",
+    "lineNumber": 68,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 64,
+    "kind": "member",
+    "name": "findAt",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#findAt",
+    "access": "public",
+    "description": "Finds the node located at the provided position.",
+    "lineNumber": 82,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 65,
+    "kind": "member",
+    "name": "positionOf",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#positionOf",
+    "access": "public",
+    "description": "Search the list for the first node containing the value provided using a strict\nequality comparison and return the index.",
+    "lineNumber": 96,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 66,
+    "kind": "member",
+    "name": "deleteAt",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#deleteAt",
+    "access": "public",
+    "description": "Deletes the the first node with the value provided, returning the value deleted.",
+    "lineNumber": 110,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 70,
+    "kind": "member",
+    "name": "delete",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#delete",
+    "access": "public",
+    "description": "Deletes the the first node with the value provided, returning the value deleted.",
+    "lineNumber": 135,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 71,
+    "kind": "member",
+    "name": "toArray",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#toArray",
+    "access": "public",
+    "description": null,
+    "lineNumber": 144,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 72,
+    "kind": "member",
+    "name": "_checkIsNumber",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#_checkIsNumber",
+    "access": "private",
+    "description": null,
+    "lineNumber": 157,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 73,
+    "kind": "member",
+    "name": "_checkIsInBounds",
+    "memberof": "src/LinkedList/index.js~LinkedList",
+    "static": false,
+    "longname": "src/LinkedList/index.js~LinkedList#_checkIsInBounds",
+    "access": "private",
+    "description": null,
+    "lineNumber": 164,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 74,
     "kind": "file",
     "name": "src/LinkedList/spec.js",
-    "content": "import { expect } from 'chai';\nimport LinkedList from './index';\n\ndescribe('LinkedList', () => {\n  let list;\n  beforeEach(() => {\n    list = new LinkedList();\n    list\n      .insert('a')\n      .insert('b')\n      .insert('c');\n  });\n\n  describe('length', () => {\n    it('returns the number of nodes in the list', () => {\n      const emptyList = new LinkedList();\n      expect(emptyList.length).to.equal(0);\n      expect(list.length).to.equal(3);\n    });\n  });\n\n  describe('#search', () => {\n    it('return the position of the node with data matching', () => {\n      expect(list.search('a')).to.equal(0);\n      expect(list.search('b')).to.equal(1);\n    });\n    it('returns null if nothing is found', () => {\n      expect(list.search('!')).to.equal(null);\n    });\n  });\n\n  describe('#searchAt', () => {\n    it('returns the data contained at a specified position in the list', () => {\n      expect(list.searchAt(0)).to.equal('a');\n      expect(list.searchAt(1)).to.equal('b');\n    });\n  });\n\n  describe('#insert', () => {\n    it('inserts a node at the end of the list', () => {\n      list.insert('Ω');\n      expect(list.searchAt(list.length - 1)).to.equal('Ω');\n    });\n    it('returns itself to allow for method chaining', () => {\n      expect(list.insert('d')).to.equal(list);\n    });\n  });\n\n  describe('#insertFirst', () => {\n    it('inserts a node at the beginning of the list', () => {\n      list.insert('α');\n      expect(list.searchAt(0)).to.equal('α');\n    });\n    it('returns itself to allow for method chaining', () => {\n      expect(list.insertFirst('α')).to.equal(list);\n    });\n  });\n\n  describe('#delete', () => {\n    it('removes a specified element from the list & returns it', () => {\n      const listLength = list.length;\n      expect(list.delete('a')).to.equal('a');\n      expect(list.length).to.equal(listLength - 1);\n    });\n    it('returns null if nothing is found to delete', () => {\n      expect(list.delete('!')).to.equal(null);\n    });\n    it('returns itself to allow for method chaining', () => {\n      expect(list.delete('!')).to.equal(list);\n    });\n  });\n\n  describe('#toArray', () => {\n    it('returns an array that represents the list', () => {\n      expect(list.toArray()).to.equal(['a', 'b', 'c']);\n    });\n  });\n});\n",
+    "content": "import { expect } from 'chai';\nimport { LinkedList, Node } from '../';\n\ndescribe('LinkedList', () => {\n  let list;\n  beforeEach(() => {\n    list = new LinkedList();\n    list\n      .insert('a')\n      .insert('b')\n      .insert('c');\n  });\n\n  describe('length', () => {\n    it('returns the number of nodes in the list', () => {\n      const emptyList = new LinkedList();\n      expect(emptyList.length).to.equal(0);\n      expect(list.length).to.equal(3);\n    });\n  });\n\n  describe('#insert', () => {\n    it('inserts a node at the end of the list', () => {\n      list.insert('Ω');\n      expect(list.findAt(list.length - 1).value).to.equal('Ω');\n    });\n    it('returns itself to allow for method chaining', () => {\n      expect(list.insert('d')).to.equal(list);\n    });\n  });\n\n  describe('#insertAt', () => {\n    it('inserts a node into the desired location of the list', () => {\n      list.insertAt('∆', 1);\n      expect(list.findAt(1).value).to.equal('∆');\n      list.insertAt('∑', 3);\n      expect(list.findAt(3).value).to.equal('∑');\n      expect(list.length).to.equal(5);\n    });\n    it('expects a index to be provided', () => {\n      expect(() => list.insertAt('∆')).to.throw();\n      expect(() => list.insertAt('∆', null)).to.throw();\n      expect(() => list.insertAt('∆', '3')).to.throw();\n    });\n    it('returns itself to allow for method chaining', () => {\n      expect(list.insertAt('∆', 1)).to.equal(list);\n    });\n  });\n\n  describe('#insertFirst', () => {\n    it('inserts a node at the beginning of the list and increments the length', () => {\n      list.insertFirst('α');\n      expect(list.findAt(0).value).to.equal('α');\n      expect(list.findAt(1).value).to.equal('a');\n      expect(list.findAt(2).value).to.equal('b');\n      expect(list.findAt(3).value).to.equal('c');\n      expect(list.length).to.equal(4);\n    });\n    it('returns itself to allow for method chaining', () => {\n      expect(list.insertFirst('α')).to.equal(list);\n    });\n  });\n\n  describe('#get', () => {\n    it('returns the first node found, matching the value provided', () => {\n      const NodeA = list.get('a');\n      const NodeB = list.get('b');\n      const NodeC = list.get('c');\n      expect(NodeA.value).to.equal('a');\n      expect(NodeA.next).to.equal(NodeB);\n      expect(NodeC).to.be.an.instanceOf(Node);\n    });\n    it('returns null if nothing matches', () => {\n      expect(list.get('Ω')).to.equal(null);\n    });\n  });\n\n  describe('#findAt', () => {\n    it('returns the node contained at a specified position in the list', () => {\n      const Node0 = list.findAt(0);\n      const Node1 = list.findAt(1);\n      expect(Node0.value).to.equal('a');\n      expect(Node0.next).to.equal(Node1);\n      expect(Node1.value).to.equal('b');\n    });\n  });\n\n  describe('#positionOf', () => {\n    it('returns the position of the node with matching value', () => {\n      expect(list.positionOf('a')).to.equal(0);\n      expect(list.positionOf('b')).to.equal(1);\n    });\n    it('always returns the index of the first value found', () => {\n      list.insert('a');\n      expect(list.positionOf('a')).to.equal(0);\n    });\n    it('handles undefined values', () => {\n      expect(list.positionOf(undefined)).to.equal(-1);\n    });\n    it('handles values that are not present', () => {\n      expect(list.positionOf('!')).to.equal(-1);\n    });\n  });\n\n  describe('#deleteAt', () => {\n    it('removes a specified element from the list & returns it', () => {\n      expect(list.deleteAt(0)).to.equal('a');\n      expect(list.deleteAt(1)).to.equal('c');\n      expect(list.length).to.equal(1);\n    });\n    it('can remove the node from the list', () => {\n      expect(list.deleteAt(list.length - 1)).to.equal('c');\n    });\n    it('handles an empty list', () => {\n      const emptyList = new LinkedList();\n      expect(emptyList.length).to.equal(0);\n      expect(emptyList.deleteAt(0)).to.equal(null);\n    });\n    it('throws an error if not provided a valid position', () => {\n      expect(() => list.deleteAt()).to.throw();\n      expect(() => list.deleteAt(-1)).to.throw();\n      expect(() => list.deleteAt('a')).to.throw();\n    });\n  });\n\n  describe('#delete', () => {\n    it('removes a specified element from the list & returns it', () => {\n      const listLength = list.length;\n      expect(list.delete('a')).to.equal('a');\n      expect(list.length).to.equal(listLength - 1);\n    });\n    it('returns null if nothing is found to delete', () => {\n      expect(list.delete('!')).to.equal(null);\n    });\n  });\n\n  describe('#toArray', () => {\n    it('returns an array that represents the list', () => {\n      expect(list.toArray()).to.eql(['a', 'b', 'c']);\n    });\n    it('returns an empty array for an empty list', () => {\n      const emptyList = new LinkedList();\n      expect(emptyList.toArray()).to.eql([]);\n    });\n  });\n});\n",
     "static": true,
     "longname": "/Users/itsangaris/dev/rawjs/src/LinkedList/spec.js",
     "access": "public",
@@ -685,10 +833,10 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 61,
+    "__docId__": 75,
     "kind": "file",
     "name": "src/Node/index.js",
-    "content": "/*\n * Node\n * @flow\n */\n\n/**\n * Node\n */\nclass Node {\n  data: any;\n  next: ?Node;\n  constructor(data: any) {\n    this.data = data;\n    this.next = null;\n  }\n}\n\nexport default Node;\n",
+    "content": "/*\n * Node\n * @flow\n */\n\nclass Node {\n  value: any;\n  next: ?Node;\n  constructor(value: any) {\n    this.value = value;\n    this.next = null;\n  }\n}\n\nexport default Node;\n",
     "static": true,
     "longname": "/Users/itsangaris/dev/rawjs/src/Node/index.js",
     "access": "public",
@@ -696,7 +844,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 62,
+    "__docId__": 76,
     "kind": "class",
     "name": "Node",
     "memberof": "src/Node/index.js",
@@ -706,20 +854,21 @@
     "export": true,
     "importPath": "raw/src/Node/index.js",
     "importStyle": "Node",
-    "description": "Node",
-    "lineNumber": 9,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
     "interface": false
   },
   {
-    "__docId__": 63,
+    "__docId__": 77,
     "kind": "member",
-    "name": "data",
+    "name": "value",
     "memberof": "src/Node/index.js~Node",
     "static": false,
-    "longname": "src/Node/index.js~Node#data",
+    "longname": "src/Node/index.js~Node#value",
     "access": "public",
     "description": "",
-    "lineNumber": 10,
+    "lineNumber": 7,
     "type": {
       "nullable": null,
       "types": [
@@ -730,7 +879,7 @@
     }
   },
   {
-    "__docId__": 64,
+    "__docId__": 78,
     "kind": "member",
     "name": "next",
     "memberof": "src/Node/index.js~Node",
@@ -738,7 +887,7 @@
     "longname": "src/Node/index.js~Node#next",
     "access": "public",
     "description": "",
-    "lineNumber": 11,
+    "lineNumber": 8,
     "type": {
       "nullable": null,
       "types": [
@@ -749,7 +898,7 @@
     }
   },
   {
-    "__docId__": 65,
+    "__docId__": 79,
     "kind": "constructor",
     "name": "constructor",
     "memberof": "src/Node/index.js~Node",
@@ -759,14 +908,14 @@
     "longname": "src/Node/index.js~Node#constructor",
     "access": "public",
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 9,
     "undocument": true
   },
   {
-    "__docId__": 68,
+    "__docId__": 82,
     "kind": "file",
     "name": "src/Node/spec.js",
-    "content": "import { expect } from 'chai';\nimport Node from './index';\n\ndescribe('Node', () => {\n  let node;\n  beforeEach(() => {\n    node = new Node(true);\n  });\n  it('can take a data', () => {\n    expect(node).to.have.property('data', true);\n  });\n  it('has a next node', () => {\n    expect(node).to.have.property('next', null);\n  });\n});\n",
+    "content": "import { expect } from 'chai';\nimport { Node } from '../';\n\ndescribe('Node', () => {\n  let node;\n  beforeEach(() => {\n    node = new Node(true);\n  });\n  it('can take a data', () => {\n    expect(node).to.have.property('value', true);\n  });\n  it('has a next node', () => {\n    expect(node).to.have.property('next', null);\n  });\n});\n",
     "static": true,
     "longname": "/Users/itsangaris/dev/rawjs/src/Node/spec.js",
     "access": "public",
@@ -774,10 +923,10 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 69,
+    "__docId__": 83,
     "kind": "file",
     "name": "src/index.js",
-    "content": "/*\n * Project Root\n */\n\nimport LinkedList from './LinkedList';\n\nexport default {\n  LinkedList,\n};\n",
+    "content": "/*\n * Project Root\n */\n\nimport LinkedList from './LinkedList';\nimport Node from './Node';\n\nexport { LinkedList, Node };\n",
     "static": true,
     "longname": "/Users/itsangaris/dev/rawjs/src/index.js",
     "access": "public",
@@ -786,7 +935,7 @@
   },
   {
     "kind": "index",
-    "content": "# Rawjs\n\n[![CircleCI](https://circleci.com/gh/ilias-t/rawjs/tree/master.svg?style=svg)](https://circleci.com/gh/ilias-t/rawjs/tree/master)\n\nData structures for Javascript.\n\n## Data structures\n1. [List](#list)\n\nMost methods can be chained together.\n\n### List\nA singly linked list\n\n## Committing\n\nFirst find or create a ticket on Github. Assign yourself to it, clone down the project, and `yarn install`. Submit a PR to close that ticket.\n\nMake sure the verification script passes before submitting a PR `yarn verification`.\n",
+    "content": "# Rawjs\n\n[![CircleCI](https://circleci.com/gh/ilias-t/rawjs/tree/master.svg?style=svg)](https://circleci.com/gh/ilias-t/rawjs/tree/master)\n\nData structures for Javascript. Documentation can be found in `/docs`.\n\n## Data structures\n1. [List](#list)\n\n### List\nA singly linked list.\n\n## Committing\n\nFirst find or create a ticket on Github. Assign yourself to it, clone down the project, and `yarn install`. Submit a PR to close that ticket.\n\nMake sure the verification script passes before submitting a PR `yarn verification`. It will also autogenerate new documentation based on any changes.\n",
     "longname": "/Users/itsangaris/dev/rawjs/README.md",
     "name": "./README.md",
     "static": true,
@@ -794,7 +943,7 @@
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"raw\",\n  \"version\": \"0.1.0\",\n  \"description\": \"Data structures in JS\",\n  \"main\": \"./dist/index.js\",\n  \"author\": \"Ilias Tsangaris\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"lodash\": \"^4.17.5\"\n  },\n  \"scripts\": {\n    \"build\": \"npm run verification && esdoc && babel src --out-dir dist\",\n    \"format\": \"prettier --write '**/*.js'\",\n    \"lint\": \"eslint ./src\",\n    \"prepublish\": \"npm run build\",\n    \"test\": \"mocha --opts .mocharc\",\n    \"test:watch\": \"npm run test -- --watch\",\n    \"verification\": \"npm run lint && npm run test && flow\"\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-eslint\": \"^8.2.2\",\n    \"babel-plugin-transform-class-properties\": \"^6.24.1\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"babel-preset-flow\": \"^6.23.0\",\n    \"babel-preset-stage-0\": \"^6.24.1\",\n    \"chai\": \"^4.1.2\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-flow-type-plugin\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.19.1\",\n    \"eslint-config-airbnb-base\": \"^12.1.0\",\n    \"eslint-config-prettier\": \"^2.9.0\",\n    \"eslint-plugin-chai-expect\": \"^1.1.1\",\n    \"eslint-plugin-flowtype\": \"^2.46.1\",\n    \"eslint-plugin-import\": \"^2.10.0\",\n    \"eslint-plugin-prefer-object-spread\": \"^1.2.1\",\n    \"eslint-plugin-prettier\": \"^2.6.0\",\n    \"flow-bin\": \"^0.69.0\",\n    \"flow-typed\": \"^2.4.0\",\n    \"mocha\": \"^5.0.5\",\n    \"prettier\": \"^1.11.1\",\n    \"prettier-eslint\": \"^8.8.1\"\n  }\n}\n",
+    "content": "{\n  \"name\": \"raw\",\n  \"version\": \"0.1.0\",\n  \"description\": \"Data structures in JS\",\n  \"main\": \"./dist/index.js\",\n  \"author\": \"Ilias Tsangaris\",\n  \"license\": \"MIT\",\n  \"dependencies\": {\n    \"lodash\": \"^4.17.5\"\n  },\n  \"scripts\": {\n    \"build\": \"npm run verification && babel src --out-dir dist\",\n    \"format\": \"prettier --write '**/*.js'\",\n    \"lint\": \"eslint ./src\",\n    \"prepublish\": \"npm run build\",\n    \"test\": \"nyc mocha --opts .mocharc\",\n    \"test:watch\": \"npm run test -- --watch\",\n    \"verification\": \"npm run lint && npm run test && flow && esdoc\"\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-eslint\": \"^8.2.2\",\n    \"babel-plugin-istanbul\": \"^4.1.6\",\n    \"babel-plugin-transform-class-properties\": \"^6.24.1\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"babel-preset-flow\": \"^6.23.0\",\n    \"babel-preset-stage-0\": \"^6.24.1\",\n    \"chai\": \"^4.1.2\",\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-ecmascript-proposal-plugin\": \"^1.0.0\",\n    \"esdoc-flow-type-plugin\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^4.19.1\",\n    \"eslint-config-airbnb-base\": \"^12.1.0\",\n    \"eslint-config-prettier\": \"^2.9.0\",\n    \"eslint-plugin-chai-expect\": \"^1.1.1\",\n    \"eslint-plugin-flowtype\": \"^2.46.1\",\n    \"eslint-plugin-import\": \"^2.10.0\",\n    \"eslint-plugin-prefer-object-spread\": \"^1.2.1\",\n    \"eslint-plugin-prettier\": \"^2.6.0\",\n    \"flow-bin\": \"^0.69.0\",\n    \"flow-typed\": \"^2.4.0\",\n    \"mocha\": \"^5.0.5\",\n    \"nyc\": \"^11.6.0\",\n    \"prettier\": \"^1.11.1\",\n    \"prettier-eslint\": \"^8.8.1\"\n  }\n}\n",
     "longname": "/Users/itsangaris/dev/rawjs/package.json",
     "name": "package.json",
     "static": true,
