@@ -2,15 +2,13 @@
 
 [![CircleCI](https://circleci.com/gh/ilias-t/rawjs/tree/master.svg?style=svg)](https://circleci.com/gh/ilias-t/rawjs/tree/master)
 
-Data structures for Javascript.
+Data structures for Javascript. Documentation can be found in `/docs`.
 
 ## Data structures
 1. [List](#list)
 
-Most methods can be chained together.
-
 ### List
-A singly linked list
+A singly linked list.
 
 ## Committing
 

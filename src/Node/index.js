@@ -4,10 +4,10 @@
  */
 
 class Node {
-  data: any;
+  value: any;
   next: ?Node;
-  constructor(data: any) {
-    this.data = data;
+  constructor(value: any) {
+    this.value = value;
     this.next = null;
   }
 }

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Node from './index';
+import { Node } from '../';
 
 describe('Node', () => {
   let node;
@@ -7,7 +7,7 @@ describe('Node', () => {
     node = new Node(true);
   });
   it('can take a data', () => {
-    expect(node).to.have.property('data', true);
+    expect(node).to.have.property('value', true);
   });
   it('has a next node', () => {
     expect(node).to.have.property('next', null);

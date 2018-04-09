@@ -3,8 +3,8 @@
  * @flow
  */
 
-import _ from 'lodash';
-import Node from '../Node';
+import { isNumber } from 'lodash';
+import { Node } from '../';
 
 class LinkedList {
   head: ?Node;
@@ -16,41 +16,157 @@ class LinkedList {
   }
 
   /**
-   * Inserts an item into the list
+   * Inserts the value into a node at the end of the list, recursively.
    */
-  insert = (data: any, node: ?Node = this.head) => {
+  insert = (value: any, node: ?Node = this.head): LinkedList => {
     if (node == null) {
-      this.head = new Node(data);
+      this.head = new Node(value);
       this.length += 1;
       return this;
     }
 
     if (node.next == null) {
-      node.next = new Node(data);
+      node.next = new Node(value);
       this.length += 1;
       return this;
     }
-    // Recursively insert
-    return this.insert(data, node.next);
+
+    return this.insert(value, node.next);
   };
 
   /**
-   * Searches for the item located at the provided index
+   * Inserts the value into a node with a specific position in the list.
    */
-  searchAt = (place: number): any => {
-    if (!_.isNumber(place)) {
-      throw new Error('Provided index is invalid type');
-    }
-    if (place < 0 || place > this.length) {
-      throw new Error('Provided index is out of bounds');
-    }
+  insertAt = (value: any, position: number): LinkedList => {
+    this._checkIsInBounds(position);
+    // new Node, to be inserted
+    const node = new Node(value);
 
+    if (position === 0) {
+      node.next = this.head;
+      this.head = node;
+    } else {
+      const prev = this.findAt(position - 1);
+      const { next } = prev;
+      node.next = next;
+      prev.next = node;
+    }
+    this.length += 1;
+    return this;
+  };
+
+  /**
+   * Inserts the value into a node at the beginning of the list, as the head.
+   */
+  insertFirst = (value: any): LinkedList => {
+    return this.insertAt(value, 0);
+  };
+
+  /**
+   * Returns the first node with a value matching that provided.
+   */
+  get = (value: any): ?Node => {
     let current = this.head;
-    for (let i = 0; i < place; i++) {
-      // Walk the list
+    for (let i = 0; i < this.length; i++) {
+      if (current && current.value === value) {
+        return current;
+      }
       current = current && current.next;
     }
-    return current && current.data;
+    return null;
+  };
+
+  /**
+   * Finds the node located at the provided position.
+   */
+  findAt = (position: number): any => {
+    this._checkIsInBounds(position);
+
+    let current = this.head;
+    for (let i = 0; i < position; i++) {
+      current = current && current.next;
+    }
+    return current;
+  };
+
+  /**
+   * Search the list for the first node containing the value provided using a strict
+   * equality comparison and return the index.
+   */
+  positionOf = (value: any): number => {
+    let current = this.head;
+    for (let i = 0; i < this.length; i++) {
+      if (current && current.value === value) {
+        return i;
+      }
+      current = current && current.next;
+    }
+    return -1;
+  };
+
+  /**
+   * Deletes the the first node with the value provided, returning the value deleted.
+   */
+  deleteAt = (position: number): any => {
+    this._checkIsInBounds(position);
+    if (this.head == null) {
+      return null;
+    }
+
+    if (position === 0) {
+      const target = this.head;
+      this.head = target.next;
+      this.length -= 1;
+      return target.value || null;
+    }
+    const prev = this.findAt(position - 1);
+    if (prev == null || prev.next == null) {
+      return null;
+    }
+    // Find item to delete and set the previous node's next to the deleted node's next
+    const target = prev.next;
+    prev.next = target.next;
+    this.length -= 1;
+    return target.value || null;
+  };
+
+  /**
+   * Deletes the the first node with the value provided, returning the value deleted.
+   */
+  delete = (value: any): any => {
+    try {
+      const position = this.positionOf(value);
+      return this.deleteAt(position);
+    } catch (e) {
+      return null;
+    }
+  };
+
+  toArray = (): any[] => {
+    const array = [];
+    let current = this.head;
+    for (let i = 0; i < this.length; i++) {
+      if (current) {
+        array.push(current.value);
+        current = current.next;
+      }
+    }
+    return array;
+  };
+
+  _checkIsNumber = (num: ?number): boolean => {
+    if (!isNumber(num)) {
+      throw new Error('Provided position is invalid');
+    }
+    return true;
+  };
+
+  _checkIsInBounds = (num: number): boolean => {
+    this._checkIsNumber(num);
+    if (num >= this.length || num < 0) {
+      throw new Error('Provided position is out of bounds');
+    }
+    return true;
   };
 }
 
