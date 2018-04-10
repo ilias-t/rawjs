@@ -15,7 +15,7 @@
     "prepublish": "npm run build",
     "test": "nyc mocha --opts .mocharc",
     "test:watch": "npm run test -- --watch",
-    "verification": "npm run lint && npm run test && flow && esdoc"
+    "verification": "npm run lint && npm run test && flow"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -27,10 +27,6 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
-    "esdoc": "^1.0.4",
-    "esdoc-ecmascript-proposal-plugin": "^1.0.0",
-    "esdoc-flow-type-plugin": "^1.0.1",
-    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",
