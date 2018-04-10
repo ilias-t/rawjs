@@ -26,4 +26,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       # Verify build and generate new docs
-      - run: yarn verification && yarn esdoc
+      - run: yarn verification
