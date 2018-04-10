@@ -2,14 +2,16 @@ import { expect } from 'chai';
 import { Node } from '../';
 
 describe('Node', () => {
+  let value;
   let node;
   beforeEach(() => {
-    node = new Node(true);
+    value = '√';
+    node = new Node(value);
   });
-  it('can take a data', () => {
-    expect(node).to.have.property('value', true);
+  it('can have a value', () => {
+    expect(node).to.have.property('value', value);
   });
-  it('has a next node', () => {
+  it('can have a next node', () => {
     expect(node).to.have.property('next', null);
   });
 });
