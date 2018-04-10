@@ -2,13 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/ilias-t/rawjs/tree/master.svg?style=svg)](https://circleci.com/gh/ilias-t/rawjs/tree/master)
 
-Data structures for Javascript. Documentation can be found in `/docs`.
-
-## Data structures
-1. [List](#list)
-
-### List
-A singly linked list.
+Data structures for Javascript. Find documentation [here](http://www.iliastsangaris.com/rawjs/).
 
 ## Committing
 
