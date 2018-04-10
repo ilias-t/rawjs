@@ -24,6 +24,3 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      # Verify build and generate new docs
-      - run: yarn verification
