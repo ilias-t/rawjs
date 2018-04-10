@@ -935,7 +935,7 @@
   },
   {
     "kind": "index",
-    "content": "# Rawjs\n\n[![CircleCI](https://circleci.com/gh/ilias-t/rawjs/tree/master.svg?style=svg)](https://circleci.com/gh/ilias-t/rawjs/tree/master)\n\nData structures for Javascript. Documentation can be found in `/docs`.\n\n## Data structures\n1. [List](#list)\n\n### List\nA singly linked list.\n\n## Committing\n\nFirst find or create a ticket on Github. Assign yourself to it, clone down the project, and `yarn install`. Submit a PR to close that ticket.\n\nMake sure the verification script passes before submitting a PR `yarn verification`. It will also autogenerate new documentation based on any changes.\n",
+    "content": "# Rawjs\n\n[![CircleCI](https://circleci.com/gh/ilias-t/rawjs/tree/master.svg?style=svg)](https://circleci.com/gh/ilias-t/rawjs/tree/master)\n\nData structures for Javascript. Find documentation [here](http://www.iliastsangaris.com/rawjs/).\n\n## Committing\n\nFirst find or create a ticket on Github. Assign yourself to it, clone down the project, and `yarn install`. Submit a PR to close that ticket.\n\nMake sure the verification script passes before submitting a PR `yarn verification`. It will also autogenerate new documentation based on any changes.\n",
     "longname": "/Users/itsangaris/dev/rawjs/README.md",
     "name": "./README.md",
     "static": true,
