@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/ilias-t/rawjs/tree/master.svg?style=svg)](https://circleci.com/gh/ilias-t/rawjs/tree/master)
 
-Data structures for Javascript. Find documentation [here](http://www.iliastsangaris.com/rawjs/).
+Data structures for Javascript. These are the raw ingredients that comprise more complex programming recipies. Find documentation [here](http://www.iliastsangaris.com/rawjs/).
 
 ## Committing
 
