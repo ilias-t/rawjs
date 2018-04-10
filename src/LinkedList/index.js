@@ -154,15 +154,10 @@ class LinkedList {
     return array;
   };
 
-  _checkIsNumber = (num: ?number): boolean => {
+  _checkIsInBounds = (num: number): boolean => {
     if (!isNumber(num)) {
       throw new Error('Provided position is invalid');
     }
-    return true;
-  };
-
-  _checkIsInBounds = (num: number): boolean => {
-    this._checkIsNumber(num);
     if (num >= this.length || num < 0) {
       throw new Error('Provided position is out of bounds');
     }
