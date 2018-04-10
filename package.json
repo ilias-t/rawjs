@@ -10,6 +10,7 @@
   },
   "scripts": {
     "build": "npm run verification && babel src --out-dir dist",
+    "docs": "documentation build --document-exported src/*/** -f html -o docs",
     "format": "prettier --write '**/*.js'",
     "lint": "eslint ./src",
     "prepublish": "npm run build",
@@ -27,6 +28,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-stage-0": "^6.24.1",
     "chai": "^4.1.2",
+    "documentation": "^6.1.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-config-prettier": "^2.9.0",

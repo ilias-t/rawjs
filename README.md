@@ -10,4 +10,4 @@ First find or create a ticket on Github. Assign yourself to it, clone down the p
 
 Make sure the verification script passes before submitting a PR `yarn verification`.
 
-Documentation can be generated on demand with [documentationjs](https://github.com/documentationjs/documentation) using the command `documentation build --document-exported src/*/** -f html -o docs`.
+Documentation can be generated using the command `yarn docs`.
