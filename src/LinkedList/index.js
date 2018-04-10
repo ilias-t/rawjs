@@ -108,8 +108,8 @@ class LinkedList {
    * Deletes the the first node with the value provided, returning the value deleted.
    */
   deleteAt = (position: number): any => {
-    this._checkIsInBounds(position);
     if (this.head == null) {
+      // Cannot delete from an empty list
       return null;
     }
 
@@ -117,17 +117,16 @@ class LinkedList {
       const target = this.head;
       this.head = target.next;
       this.length -= 1;
-      return target.value || null;
+      return target.value;
     }
+
+    this._checkIsInBounds(position);
     const prev = this.findAt(position - 1);
-    if (prev == null || prev.next == null) {
-      return null;
-    }
     // Find item to delete and set the previous node's next to the deleted node's next
     const target = prev.next;
     prev.next = target.next;
     this.length -= 1;
-    return target.value || null;
+    return target.value;
   };
 
   /**
@@ -144,12 +143,13 @@ class LinkedList {
 
   toArray = (): any[] => {
     const array = [];
+    if (this.head == null) {
+      return array;
+    }
     let current = this.head;
     for (let i = 0; i < this.length; i++) {
-      if (current) {
-        array.push(current.value);
-        current = current.next;
-      }
+      array.push(current.value);
+      current = current.next;
     }
     return array;
   };

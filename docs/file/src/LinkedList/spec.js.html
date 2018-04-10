@@ -37,7 +37,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/LinkedList/spec.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { expect } from &apos;chai&apos;;
-import LinkedList from &apos;./index&apos;;
+import { LinkedList, Node } from &apos;../&apos;;
 
 describe(&apos;LinkedList&apos;, () =&gt; {
   let list;
@@ -57,40 +57,107 @@ describe(&apos;LinkedList&apos;, () =&gt; {
     });
   });
 
-  describe(&apos;#search&apos;, () =&gt; {
-    it(&apos;return the position of the node with data matching&apos;, () =&gt; {
-      expect(list.search(&apos;a&apos;)).to.equal(0);
-      expect(list.search(&apos;b&apos;)).to.equal(1);
-    });
-    it(&apos;returns null if nothing is found&apos;, () =&gt; {
-      expect(list.search(&apos;!&apos;)).to.equal(null);
-    });
-  });
-
-  describe(&apos;#searchAt&apos;, () =&gt; {
-    it(&apos;returns the data contained at a specified position in the list&apos;, () =&gt; {
-      expect(list.searchAt(0)).to.equal(&apos;a&apos;);
-      expect(list.searchAt(1)).to.equal(&apos;b&apos;);
-    });
-  });
-
   describe(&apos;#insert&apos;, () =&gt; {
     it(&apos;inserts a node at the end of the list&apos;, () =&gt; {
       list.insert(&apos;&#x3A9;&apos;);
-      expect(list.searchAt(list.length - 1)).to.equal(&apos;&#x3A9;&apos;);
+      expect(list.findAt(list.length - 1).value).to.equal(&apos;&#x3A9;&apos;);
     });
     it(&apos;returns itself to allow for method chaining&apos;, () =&gt; {
       expect(list.insert(&apos;d&apos;)).to.equal(list);
     });
   });
 
+  describe(&apos;#insertAt&apos;, () =&gt; {
+    it(&apos;inserts a node into the desired location of the list&apos;, () =&gt; {
+      list.insertAt(&apos;&#x2206;&apos;, 1);
+      expect(list.findAt(1).value).to.equal(&apos;&#x2206;&apos;);
+      list.insertAt(&apos;&#x2211;&apos;, 3);
+      expect(list.findAt(3).value).to.equal(&apos;&#x2211;&apos;);
+      expect(list.length).to.equal(5);
+    });
+    it(&apos;expects a index to be provided&apos;, () =&gt; {
+      expect(() =&gt; list.insertAt(&apos;&#x2206;&apos;)).to.throw();
+      expect(() =&gt; list.insertAt(&apos;&#x2206;&apos;, null)).to.throw();
+      expect(() =&gt; list.insertAt(&apos;&#x2206;&apos;, &apos;3&apos;)).to.throw();
+    });
+    it(&apos;returns itself to allow for method chaining&apos;, () =&gt; {
+      expect(list.insertAt(&apos;&#x2206;&apos;, 1)).to.equal(list);
+    });
+  });
+
   describe(&apos;#insertFirst&apos;, () =&gt; {
-    it(&apos;inserts a node at the beginning of the list&apos;, () =&gt; {
-      list.insert(&apos;&#x3B1;&apos;);
-      expect(list.searchAt(0)).to.equal(&apos;&#x3B1;&apos;);
+    it(&apos;inserts a node at the beginning of the list and increments the length&apos;, () =&gt; {
+      list.insertFirst(&apos;&#x3B1;&apos;);
+      expect(list.findAt(0).value).to.equal(&apos;&#x3B1;&apos;);
+      expect(list.findAt(1).value).to.equal(&apos;a&apos;);
+      expect(list.findAt(2).value).to.equal(&apos;b&apos;);
+      expect(list.findAt(3).value).to.equal(&apos;c&apos;);
+      expect(list.length).to.equal(4);
     });
     it(&apos;returns itself to allow for method chaining&apos;, () =&gt; {
       expect(list.insertFirst(&apos;&#x3B1;&apos;)).to.equal(list);
+    });
+  });
+
+  describe(&apos;#get&apos;, () =&gt; {
+    it(&apos;returns the first node found, matching the value provided&apos;, () =&gt; {
+      const NodeA = list.get(&apos;a&apos;);
+      const NodeB = list.get(&apos;b&apos;);
+      const NodeC = list.get(&apos;c&apos;);
+      expect(NodeA.value).to.equal(&apos;a&apos;);
+      expect(NodeA.next).to.equal(NodeB);
+      expect(NodeC).to.be.an.instanceOf(Node);
+    });
+    it(&apos;returns null if nothing matches&apos;, () =&gt; {
+      expect(list.get(&apos;&#x3A9;&apos;)).to.equal(null);
+    });
+  });
+
+  describe(&apos;#findAt&apos;, () =&gt; {
+    it(&apos;returns the node contained at a specified position in the list&apos;, () =&gt; {
+      const Node0 = list.findAt(0);
+      const Node1 = list.findAt(1);
+      expect(Node0.value).to.equal(&apos;a&apos;);
+      expect(Node0.next).to.equal(Node1);
+      expect(Node1.value).to.equal(&apos;b&apos;);
+    });
+  });
+
+  describe(&apos;#positionOf&apos;, () =&gt; {
+    it(&apos;returns the position of the node with matching value&apos;, () =&gt; {
+      expect(list.positionOf(&apos;a&apos;)).to.equal(0);
+      expect(list.positionOf(&apos;b&apos;)).to.equal(1);
+    });
+    it(&apos;always returns the index of the first value found&apos;, () =&gt; {
+      list.insert(&apos;a&apos;);
+      expect(list.positionOf(&apos;a&apos;)).to.equal(0);
+    });
+    it(&apos;handles undefined values&apos;, () =&gt; {
+      expect(list.positionOf(undefined)).to.equal(-1);
+    });
+    it(&apos;handles values that are not present&apos;, () =&gt; {
+      expect(list.positionOf(&apos;!&apos;)).to.equal(-1);
+    });
+  });
+
+  describe(&apos;#deleteAt&apos;, () =&gt; {
+    it(&apos;removes a specified element from the list &amp; returns it&apos;, () =&gt; {
+      expect(list.deleteAt(0)).to.equal(&apos;a&apos;);
+      expect(list.deleteAt(1)).to.equal(&apos;c&apos;);
+      expect(list.length).to.equal(1);
+    });
+    it(&apos;can remove the node from the list&apos;, () =&gt; {
+      expect(list.deleteAt(list.length - 1)).to.equal(&apos;c&apos;);
+    });
+    it(&apos;handles an empty list&apos;, () =&gt; {
+      const emptyList = new LinkedList();
+      expect(emptyList.length).to.equal(0);
+      expect(emptyList.deleteAt(0)).to.equal(null);
+    });
+    it(&apos;throws an error if not provided a valid position&apos;, () =&gt; {
+      expect(() =&gt; list.deleteAt()).to.throw();
+      expect(() =&gt; list.deleteAt(-1)).to.throw();
+      expect(() =&gt; list.deleteAt(&apos;a&apos;)).to.throw();
     });
   });
 
@@ -103,14 +170,15 @@ describe(&apos;LinkedList&apos;, () =&gt; {
     it(&apos;returns null if nothing is found to delete&apos;, () =&gt; {
       expect(list.delete(&apos;!&apos;)).to.equal(null);
     });
-    it(&apos;returns itself to allow for method chaining&apos;, () =&gt; {
-      expect(list.delete(&apos;!&apos;)).to.equal(list);
-    });
   });
 
   describe(&apos;#toArray&apos;, () =&gt; {
     it(&apos;returns an array that represents the list&apos;, () =&gt; {
-      expect(list.toArray()).to.equal([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]);
+      expect(list.toArray()).to.eql([&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]);
+    });
+    it(&apos;returns an empty array for an empty list&apos;, () =&gt; {
+      const emptyList = new LinkedList();
+      expect(emptyList.toArray()).to.eql([]);
     });
   });
 });

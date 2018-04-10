@@ -37,7 +37,7 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/Node/spec.js</h1>
 <pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { expect } from &apos;chai&apos;;
-import Node from &apos;./index&apos;;
+import { Node } from &apos;../&apos;;
 
 describe(&apos;Node&apos;, () =&gt; {
   let node;
@@ -45,7 +45,7 @@ describe(&apos;Node&apos;, () =&gt; {
     node = new Node(true);
   });
   it(&apos;can take a data&apos;, () =&gt; {
-    expect(node).to.have.property(&apos;data&apos;, true);
+    expect(node).to.have.property(&apos;value&apos;, true);
   });
   it(&apos;has a next node&apos;, () =&gt; {
     expect(node).to.have.property(&apos;next&apos;, null);

@@ -108,6 +108,14 @@ describe('LinkedList', () => {
       expect(list.deleteAt(1)).to.equal('c');
       expect(list.length).to.equal(1);
     });
+    it('can remove the node from the list', () => {
+      expect(list.deleteAt(list.length - 1)).to.equal('c');
+    });
+    it('handles an empty list', () => {
+      const emptyList = new LinkedList();
+      expect(emptyList.length).to.equal(0);
+      expect(emptyList.deleteAt(0)).to.equal(null);
+    });
     it('throws an error if not provided a valid position', () => {
       expect(() => list.deleteAt()).to.throw();
       expect(() => list.deleteAt(-1)).to.throw();
