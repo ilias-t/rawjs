@@ -1,12 +1,12 @@
 /*
- * TreeNode
+ * BinaryTreeNode
  * @flow
  */
 
-class TreeNode {
+class BinaryTreeNode {
   value: any;
-  left: ?TreeNode;
-  right: ?TreeNode;
+  left: ?BinaryTreeNode;
+  right: ?BinaryTreeNode;
   constructor(value: any) {
     this.value = value;
     this.left = null;
@@ -14,4 +14,4 @@ class TreeNode {
   }
 }
 
-export default TreeNode;
+export default BinaryTreeNode;

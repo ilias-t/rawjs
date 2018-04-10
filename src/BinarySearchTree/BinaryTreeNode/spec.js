@@ -1,12 +1,12 @@
 import { expect } from 'chai';
-import { TreeNode } from '../';
+import BinaryTreeNode from './';
 
-describe('TreeNode', () => {
+describe('BinaryTreeNode', () => {
   let value;
   let node;
   beforeEach(() => {
     value = '√';
-    node = new TreeNode(value);
+    node = new BinaryTreeNode(value);
   });
   it('has a value', () => {
     expect(node).to.have.property('value', value);

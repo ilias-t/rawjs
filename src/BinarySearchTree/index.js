@@ -4,21 +4,27 @@
  */
 
 import { isNumber } from 'lodash';
-import { TreeNode } from '../';
+import BinaryTreeNode from './BinaryTreeNode';
 
 class BinarySearchTree {
-  root: ?TreeNode;
+  root: ?BinaryTreeNode;
 
   constructor() {
     this.root = null;
   }
 
-  insert = (value: number, currentNode: ?TreeNode = this.root): BinarySearchTree => {
+  /**
+   * Inserts a value into the tree, in the correct position
+   */
+  insert = (
+    value: number,
+    currentNode: ?BinaryTreeNode = this.root
+  ): BinarySearchTree => {
     if (!isNumber(value)) {
       throw new Error('Binary search tree only supports numerical values');
     }
     // Node to insert
-    const node = new TreeNode(value);
+    const node = new BinaryTreeNode(value);
     if (currentNode == null) {
       // Is an empty tree
       this.root = node;
@@ -48,7 +54,10 @@ class BinarySearchTree {
     return this;
   };
 
-  has = (value: number, currentNode: ?TreeNode = this.root): boolean => {
+  /**
+   * Returns whether or not the tree contains a specific value
+   */
+  has = (value: number, currentNode: ?BinaryTreeNode = this.root): boolean => {
     if (!isNumber(value) || currentNode == null) {
       // Either is an invalid value or the tree is empty
       return false;
@@ -74,7 +83,10 @@ class BinarySearchTree {
     return true;
   };
 
-  min = (currentNode: ?TreeNode = this.root): ?number => {
+  /**
+   * Returns the minimum value of the tree
+   */
+  min = (currentNode: ?BinaryTreeNode = this.root): ?number => {
     if (currentNode == null) {
       // Tree is empty
       return null;
@@ -86,7 +98,10 @@ class BinarySearchTree {
     return this.min(left);
   };
 
-  max = (currentNode: ?TreeNode = this.root): ?number => {
+  /**
+   * Returns the maximum value of the tree
+   */
+  max = (currentNode: ?BinaryTreeNode = this.root): ?number => {
     if (currentNode == null) {
       // Tree is empty
       return null;

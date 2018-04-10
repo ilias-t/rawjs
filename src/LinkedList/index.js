@@ -4,10 +4,10 @@
  */
 
 import { isNumber } from 'lodash';
-import { Node } from '../';
+import LinkedListNode from './LinkedListNode';
 
 class LinkedList {
-  head: ?Node;
+  head: ?LinkedListNode;
   length: number;
 
   constructor() {
@@ -18,15 +18,15 @@ class LinkedList {
   /**
    * Inserts the value into a node at the end of the list, recursively.
    */
-  insert = (value: any, node: ?Node = this.head): LinkedList => {
+  insert = (value: any, node: ?LinkedListNode = this.head): LinkedList => {
     if (node == null) {
-      this.head = new Node(value);
+      this.head = new LinkedListNode(value);
       this.length += 1;
       return this;
     }
 
     if (node.next == null) {
-      node.next = new Node(value);
+      node.next = new LinkedListNode(value);
       this.length += 1;
       return this;
     }
@@ -39,8 +39,8 @@ class LinkedList {
    */
   insertAt = (value: any, position: number): LinkedList => {
     this._checkIsInBounds(position);
-    // new Node, to be inserted
-    const node = new Node(value);
+    // new node to be inserted
+    const node = new LinkedListNode(value);
 
     if (position === 0) {
       node.next = this.head;
@@ -65,7 +65,7 @@ class LinkedList {
   /**
    * Returns the first node with a value matching that provided.
    */
-  get = (value: any): ?Node => {
+  get = (value: any): ?LinkedListNode => {
     let current = this.head;
     for (let i = 0; i < this.length; i++) {
       if (current && current.value === value) {
@@ -148,8 +148,8 @@ class LinkedList {
     }
     let current = this.head;
     for (let i = 0; i < this.length; i++) {
-      array.push(current.value);
-      current = current.next;
+      array.push(current && current.value);
+      current = current && current.next;
     }
     return array;
   };

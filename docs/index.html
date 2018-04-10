@@ -25,9 +25,9 @@
               
                 
                 <li><a
-                  href='#treenode'
+                  href='#binarytreenode'
                   class=" toggle-sibling">
-                  TreeNode
+                  BinaryTreeNode
                   <span class='icon'>▸</span>
                 </a>
                 
@@ -38,19 +38,19 @@
                       <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
-                        href='#treenodevalue'
+                        href='#binarytreenodevalue'
                         class='regular pre-open'>
                         #value
                       </a></li>
                       
                       <li><a
-                        href='#treenodeleft'
+                        href='#binarytreenodeleft'
                         class='regular pre-open'>
                         #left
                       </a></li>
                       
                       <li><a
-                        href='#treenoderight'
+                        href='#binarytreenoderight'
                         class='regular pre-open'>
                         #right
                       </a></li>
@@ -65,9 +65,9 @@
               
                 
                 <li><a
-                  href='#node'
+                  href='#linkedlistnode'
                   class=" toggle-sibling">
-                  Node
+                  LinkedListNode
                   <span class='icon'>▸</span>
                 </a>
                 
@@ -78,13 +78,13 @@
                       <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
-                        href='#nodevalue'
+                        href='#linkedlistnodevalue'
                         class='regular pre-open'>
                         #value
                       </a></li>
                       
                       <li><a
-                        href='#nodenext'
+                        href='#linkedlistnodenext'
                         class='regular pre-open'>
                         #next
                       </a></li>
@@ -258,8 +258,8 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='treenode'>
-      TreeNode
+    <h3 class='fl m0' id='binarytreenode'>
+      BinaryTreeNode
     </h3>
     
     
@@ -268,7 +268,7 @@
 
   
 
-  <div class='pre p1 fill-light mt0'>new TreeNode(value: any)</div>
+  <div class='pre p1 fill-light mt0'>new BinaryTreeNode(value: any)</div>
   
   
 
@@ -308,7 +308,7 @@
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='border-bottom' id='treenodevalue'>
+    <div class='border-bottom' id='binarytreenodevalue'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
@@ -358,7 +358,7 @@
       </div>
     </div>
   
-    <div class='border-bottom' id='treenodeleft'>
+    <div class='border-bottom' id='binarytreenodeleft'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
@@ -376,7 +376,7 @@
   
     <p>
       Type:
-      <a href="#treenode">TreeNode</a>?
+      <a href="#binarytreenode">BinaryTreeNode</a>?
     </p>
   
   
@@ -408,7 +408,7 @@
       </div>
     </div>
   
-    <div class='border-bottom' id='treenoderight'>
+    <div class='border-bottom' id='binarytreenoderight'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
@@ -426,7 +426,7 @@
   
     <p>
       Type:
-      <a href="#treenode">TreeNode</a>?
+      <a href="#binarytreenode">BinaryTreeNode</a>?
     </p>
   
   
@@ -473,8 +473,8 @@
   
   <div class='clearfix'>
     
-    <h3 class='fl m0' id='node'>
-      Node
+    <h3 class='fl m0' id='linkedlistnode'>
+      LinkedListNode
     </h3>
     
     
@@ -483,7 +483,7 @@
 
   
 
-  <div class='pre p1 fill-light mt0'>new Node(value: any)</div>
+  <div class='pre p1 fill-light mt0'>new LinkedListNode(value: any)</div>
   
   
 
@@ -523,7 +523,7 @@
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
   
-    <div class='border-bottom' id='nodevalue'>
+    <div class='border-bottom' id='linkedlistnodevalue'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
@@ -573,7 +573,7 @@
       </div>
     </div>
   
-    <div class='border-bottom' id='nodenext'>
+    <div class='border-bottom' id='linkedlistnodenext'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
@@ -591,7 +591,7 @@
   
     <p>
       Type:
-      <a href="#node">Node</a>?
+      <a href="#linkedlistnode">LinkedListNode</a>?
     </p>
   
   
@@ -693,7 +693,7 @@
   
     <p>
       Type:
-      <a href="#treenode">TreeNode</a>?
+      <a href="#binarytreenode">BinaryTreeNode</a>?
     </p>
   
   
@@ -737,7 +737,8 @@
 
   
 
-  
+  <p>Inserts a value into the tree, in the correct position</p>
+
 
   <div class='pre p1 fill-light mt0'>insert</div>
   
@@ -782,7 +783,8 @@
 
   
 
-  
+  <p>Returns whether or not the tree contains a specific value</p>
+
 
   <div class='pre p1 fill-light mt0'>has</div>
   
@@ -827,7 +829,8 @@
 
   
 
-  
+  <p>Returns the minimum value of the tree</p>
+
 
   <div class='pre p1 fill-light mt0'>min</div>
   
@@ -872,7 +875,8 @@
 
   
 
-  
+  <p>Returns the maximum value of the tree</p>
+
 
   <div class='pre p1 fill-light mt0'>max</div>
   
@@ -975,7 +979,7 @@
   
     <p>
       Type:
-      <a href="#node">Node</a>?
+      <a href="#linkedlistnode">LinkedListNode</a>?
     </p>
   
   

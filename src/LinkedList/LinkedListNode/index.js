@@ -1,15 +1,15 @@
 /*
- * Node
+ * LinkedListNode
  * @flow
  */
 
-class Node {
+class LinkedListNode {
   value: any;
-  next: ?Node;
+  next: ?LinkedListNode;
   constructor(value: any) {
     this.value = value;
     this.next = null;
   }
 }
 
-export default Node;
+export default LinkedListNode;
