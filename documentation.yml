@@ -1,0 +1,13 @@
+# Please keep this list alphabetized
+
+toc:
+  - name: External Structures
+    description: |
+      These are the exported data structures.
+  - BinarySearchTree
+  - LinkedList
+  - name: Internal Structures
+    description: |
+      These are non-exported data structures that are used internally.
+  - BinarySearchTreeNode
+  - LinkedListNode
