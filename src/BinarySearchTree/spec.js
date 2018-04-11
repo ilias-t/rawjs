@@ -94,9 +94,11 @@ describe('BinarySearchTree', () => {
 
   describe('min', () => {
     it('returns the minimum value contained in the tree', () => {
-      expect(bSearchTree.min()).to.equal(1);
+      const min = bSearchTree.min();
+      expect(min).to.be.an.instanceOf(BinarySearchTreeNode);
+      expect(min.value).to.equal(1);
       bSearchTree.insert(0);
-      expect(bSearchTree.min()).to.equal(0);
+      expect(bSearchTree.min().value).to.equal(0);
     });
     it('handles an empty tree', () => {
       expect(emptyTree.min()).to.equal(null);
@@ -105,9 +107,11 @@ describe('BinarySearchTree', () => {
 
   describe('max', () => {
     it('returns the maximum value contained in the tree', () => {
-      expect(bSearchTree.max()).to.equal(3);
+      const max = bSearchTree.max();
+      expect(max).to.be.an.instanceOf(BinarySearchTreeNode);
+      expect(max.value).to.equal(3);
       bSearchTree.insert(4);
-      expect(bSearchTree.max()).to.equal(4);
+      expect(bSearchTree.max().value).to.equal(4);
     });
     it('handles an empty tree', () => {
       expect(emptyTree.max()).to.equal(null);
@@ -115,6 +119,7 @@ describe('BinarySearchTree', () => {
   });
 
   describe('remove', () => {
+    // FIXME ADD MORE TEST COVERAGE
     it('removes a node from the tree', () => {
       bSearchTree.insert(0);
       bSearchTree.insert(4);
