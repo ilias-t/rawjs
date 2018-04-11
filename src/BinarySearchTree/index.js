@@ -56,7 +56,7 @@ class BinarySearchTree {
    * Returns a node based on the value provided.
    */
   get = (
-    value: number,
+    value: ?number,
     currentNode: ?BinarySearchTreeNode = this.root,
     previousNode: ?BinarySearchTreeNode = null
   ): ?{
@@ -100,14 +100,14 @@ class BinarySearchTree {
   /**
    * Returns the minimum value of the tree.
    */
-  min = (currentNode: ?BinarySearchTreeNode = this.root): ?number => {
+  min = (currentNode: ?BinarySearchTreeNode = this.root): ?BinarySearchTreeNode => {
     if (currentNode == null) {
       // Tree is empty
       return null;
     }
-    const { left, value } = currentNode;
+    const { left } = currentNode;
     if (left == null) {
-      return value;
+      return currentNode;
     }
     return this.min(left);
   };
@@ -115,19 +115,19 @@ class BinarySearchTree {
   /**
    * Returns the maximum value of the tree.
    */
-  max = (currentNode: ?BinarySearchTreeNode = this.root): ?number => {
+  max = (currentNode: ?BinarySearchTreeNode = this.root): ?BinarySearchTreeNode => {
     if (currentNode == null) {
       // Tree is empty
       return null;
     }
-    const { right, value } = currentNode;
+    const { right } = currentNode;
     if (right == null) {
-      return value;
+      return currentNode;
     }
     return this.max(right);
   };
 
-  remove = (value: number): ?BinarySearchTreeNode => {
+  remove = (value: ?number): ?BinarySearchTreeNode => {
     this._checkInputIsValid(value);
     const { root: rootNode } = this;
     if (rootNode == null) {
@@ -140,9 +140,8 @@ class BinarySearchTree {
       return null;
     }
     const { previous, node } = getNodeResult;
-
+    // First case: check if root is being removed
     if (previous == null) {
-      // Root is being removed
       if (rootNode.left) {
         this.root = rootNode.left;
         this.root.right = rootNode.right;
@@ -156,7 +155,31 @@ class BinarySearchTree {
     }
     // Determine if the node is the left of right child of its parent
     const nodeIsLeftChild = previous.left === node;
-    // Prefer replacing the removed node with its right child
+    // Second case: check if node to remove has no children
+    if (node.left == null && node.right == null) {
+      if (nodeIsLeftChild) {
+        previous.left = null;
+      } else {
+        previous.right = null;
+      }
+      return node;
+    }
+    // Third case: check if node to remove has two children
+    if (node.left != null && node.right != null) {
+      const branchMin = this.min(node);
+      // Remove the local minimum, but add it back below into the removed node's position
+      this.remove(branchMin && branchMin.value);
+      if (nodeIsLeftChild) {
+        previous.left = branchMin;
+      } else {
+        previous.right = branchMin;
+      }
+      return node;
+    }
+    /*
+     * Final case: node must have only one child
+     * Prefer replacing removed node with its right child, if available
+     */
     const replacementNode = node.right || node.left;
     if (nodeIsLeftChild) {
       previous.left = replacementNode;
