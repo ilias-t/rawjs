@@ -1,12 +1,12 @@
 import { expect } from 'chai';
-import { Node } from '../';
+import LinkedListNode from './';
 
-describe('Node', () => {
+describe('LinkedListNode', () => {
   let value;
   let node;
   beforeEach(() => {
     value = '√';
-    node = new Node(value);
+    node = new LinkedListNode(value);
   });
   it('can have a value', () => {
     expect(node).to.have.property('value', value);

@@ -1,5 +1,6 @@
 import { expect } from 'chai';
-import { LinkedList, Node } from '../';
+import LinkedList from './';
+import LinkedListNode from './LinkedListNode';
 
 describe('LinkedList', () => {
   let list;
@@ -63,12 +64,12 @@ describe('LinkedList', () => {
 
   describe('#get', () => {
     it('returns the first node found, matching the value provided', () => {
-      const NodeA = list.get('a');
-      const NodeB = list.get('b');
-      const NodeC = list.get('c');
-      expect(NodeA.value).to.equal('a');
-      expect(NodeA.next).to.equal(NodeB);
-      expect(NodeC).to.be.an.instanceOf(Node);
+      const nodeA = list.get('a');
+      const nodeB = list.get('b');
+      const nodeC = list.get('c');
+      expect(nodeA.value).to.equal('a');
+      expect(nodeA.next).to.equal(nodeB);
+      expect(nodeC).to.be.an.instanceOf(LinkedListNode);
     });
     it('returns null if nothing matches', () => {
       expect(list.get('Ω')).to.equal(null);
