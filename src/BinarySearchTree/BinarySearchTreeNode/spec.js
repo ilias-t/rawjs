@@ -11,6 +11,9 @@ describe('BinarySearchTreeNode', () => {
   it('has a value', () => {
     expect(node).to.have.property('value', value);
   });
+  it('can have a parent node', () => {
+    expect(node).to.have.property('parent', null);
+  });
   it('can have a left node', () => {
     expect(node).to.have.property('left', null);
   });

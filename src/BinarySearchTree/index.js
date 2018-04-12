@@ -23,7 +23,7 @@ class BinarySearchTree {
     this._checkInputIsValid(value);
     // Node to insert
     const node = new BinarySearchTreeNode(value);
-    if (currentNode == null) {
+    if (!currentNode) {
       // Is an empty tree
       this.root = node;
       return this;
@@ -31,7 +31,7 @@ class BinarySearchTree {
     const { left, right, value: currentValue } = currentNode;
     if (value < currentValue) {
       // Value is lesser, move left
-      if (left == null) {
+      if (!left) {
         // A leaf has been reached, insert the node
         currentNode.left = node;
         return this;
@@ -40,7 +40,7 @@ class BinarySearchTree {
       return this.insert(value, left);
     } else if (value > currentValue) {
       // Value is greater, move right
-      if (right == null) {
+      if (!right) {
         // A leaf has been reached, insert the node
         currentNode.right = node;
         return this;
@@ -53,33 +53,31 @@ class BinarySearchTree {
   };
 
   /**
-   * Returns a node based on the value provided.
+   * Attempts to find the node with the value provided and return a result containing
+   * both the node and its parent.
    */
   get = (
     value: ?number,
     currentNode: ?BinarySearchTreeNode = this.root,
-    previousNode: ?BinarySearchTreeNode = null
-  ): ?{
-    previous: ?BinarySearchTreeNode,
-    node: BinarySearchTreeNode,
-  } => {
+    parentNode: ?BinarySearchTreeNode = null
+  ): ?BinarySearchTreeNode => {
     this._checkInputIsValid(value);
 
-    if (currentNode == null) {
+    if (!currentNode) {
       // Tree is empty
       return null;
     }
 
     const { left, right, value: currentValue } = currentNode;
     if (value < currentValue) {
-      if (left == null) {
+      if (!left) {
         // Value not found
         return null;
       }
       // Keep searching to the left recursively
       return this.get(value, left, currentNode);
     } else if (value > currentValue) {
-      if (right == null) {
+      if (!right) {
         // Value not found
         return null;
       }
@@ -87,7 +85,8 @@ class BinarySearchTree {
       return this.get(value, right, currentNode);
     }
     // Values are equal
-    return { previous: previousNode, node: currentNode };
+    currentNode.parent = parentNode;
+    return currentNode;
   };
 
   /**
@@ -98,95 +97,97 @@ class BinarySearchTree {
   };
 
   /**
-   * Returns the minimum value of the tree.
+   * Attempts to find node with the minimum value in the tree and return a result
+   * containing both the node and its parent.
    */
   min = (currentNode: ?BinarySearchTreeNode = this.root): ?BinarySearchTreeNode => {
-    if (currentNode == null) {
+    if (!currentNode) {
       // Tree is empty
       return null;
     }
     const { left } = currentNode;
-    if (left == null) {
+    if (!left) {
       return currentNode;
     }
     return this.min(left);
   };
 
   /**
-   * Returns the maximum value of the tree.
+   * Attempts to find node with the maximum value in the tree and return a result
+   * containing both the node and its parent.
    */
   max = (currentNode: ?BinarySearchTreeNode = this.root): ?BinarySearchTreeNode => {
-    if (currentNode == null) {
+    if (!currentNode) {
       // Tree is empty
       return null;
     }
     const { right } = currentNode;
-    if (right == null) {
+    if (!right) {
       return currentNode;
     }
     return this.max(right);
   };
 
-  remove = (value: ?number): ?BinarySearchTreeNode => {
+  /**
+   * Attempts to remove the node with the specified value. It will return null if no
+   * node is found with that value.
+   */
+  remove = (
+    value: ?number,
+    currentNode: ?BinarySearchTreeNode = this.root
+  ): ?BinarySearchTreeNode => {
     this._checkInputIsValid(value);
-    const { root: rootNode } = this;
-    if (rootNode == null) {
-      return null;
-    }
     // Get the node with the value
-    const getNodeResult = this.get(value);
-    if (getNodeResult == null) {
+    const node = this.get(value, currentNode);
+    if (!node) {
       // No node was found with that value
       return null;
     }
-    const { previous, node } = getNodeResult;
-    // First case: check if root is being removed
-    if (previous == null) {
-      if (rootNode.left) {
-        this.root = rootNode.left;
-        this.root.right = rootNode.right;
-        return rootNode;
-      } else if (rootNode.right) {
-        this.root = rootNode.right;
-        return rootNode;
-      }
-      this.root = null;
-      return rootNode;
-    }
-    // Determine if the node is the left of right child of its parent
-    const nodeIsLeftChild = previous.left === node;
-    // Second case: check if node to remove has no children
-    if (node.left == null && node.right == null) {
-      if (nodeIsLeftChild) {
-        previous.left = null;
-      } else {
-        previous.right = null;
-      }
+    // First, check if node has no children
+    if (!node.left && !node.right) {
+      this._transplant(node, null);
       return node;
     }
-    // Third case: check if node to remove has two children
-    if (node.left != null && node.right != null) {
-      const branchMin = this.min(node);
-      // Remove the local minimum, but add it back below into the removed node's position
-      this.remove(branchMin && branchMin.value);
-      if (nodeIsLeftChild) {
-        previous.left = branchMin;
-      } else {
-        previous.right = branchMin;
-      }
+    // Second, check if node to remove has only one child
+    if ((!node.left && node.right) || (node.left && !node.right)) {
+      const replacementNode = node.left || node.right;
+      this._transplant(node, replacementNode);
       return node;
     }
     /*
-     * Final case: node must have only one child
-     * Prefer replacing removed node with its right child, if available
+     * Lastly, determine the node has two children. Deterministically always choose to
+     * replace from the left side.
      */
-    const replacementNode = node.right || node.left;
-    if (nodeIsLeftChild) {
-      previous.left = replacementNode;
-    } else {
-      previous.right = replacementNode;
+    const replacementNode =
+      this.max(node.left) || this.min(node.right) || new BinarySearchTreeNode();
+    // Cleanup to ensure there are not duplicate copies of the same node
+    this.remove(replacementNode.value, node);
+    // Swap node with replacement node
+    if (node.left !== replacementNode) {
+      replacementNode.left = node.left;
     }
+    if (node.right !== replacementNode) {
+      replacementNode.right = node.right;
+    }
+    this._transplant(node, replacementNode);
     return node;
+  };
+
+  _transplant = (
+    existingNode: BinarySearchTreeNode,
+    replacementNode: ?BinarySearchTreeNode
+  ): void => {
+    const { parent } = existingNode;
+    const nodeIsLeftChild = (parent && parent.left === existingNode) || null;
+    if (parent) {
+      if (nodeIsLeftChild) {
+        parent.left = replacementNode;
+      } else {
+        parent.right = replacementNode;
+      }
+    } else {
+      this.root = replacementNode;
+    }
   };
 
   _checkInputIsValid = (value: any) => {
