@@ -16,33 +16,30 @@ describe('BinarySearchTree', () => {
 
   describe('get', () => {
     it('returns the node containing the queried value', () => {
-      const { node: node1 } = sampleTree.get(1);
-      const { node: node3 } = sampleTree.get(3);
+      const node1 = sampleTree.get(1);
+      const node3 = sampleTree.get(3);
       expect(node1).to.be.an.instanceOf(BinarySearchTreeNode);
       expect(node3).to.be.an.instanceOf(BinarySearchTreeNode);
       expect(node1.value).to.equal(1);
       expect(node3.value).to.equal(3);
     });
     it('returns the parent node of the queried value, when present', () => {
-      const { parent: parent1 } = sampleTree.get(1);
-      const { parent: parent2, node: node2 } = sampleTree.get(2);
-      const { parent: parent3 } = sampleTree.get(3);
-      expect(parent2).to.equal(null);
-      expect(parent1).to.equal(node2);
-      expect(parent3).to.equal(node2);
+      const node1 = sampleTree.get(1);
+      const node2 = sampleTree.get(2);
+      const node3 = sampleTree.get(3);
+      expect(node2.parent).to.equal(null);
+      expect(node1.parent).to.equal(node2);
+      expect(node3.parent).to.equal(node2);
     });
-    it('returns false if a value is not present in the tree', () => {
-      const { node: node0, parent: parent0 } = sampleTree.get(0);
+    it('returns null if a value is not present in the tree', () => {
+      const node0 = sampleTree.get(0);
       expect(node0).to.equal(null);
-      expect(parent0).to.equal(null);
-      const { node: node4, parent: parent4 } = sampleTree.get(4);
+      const node4 = sampleTree.get(4);
       expect(node4).to.equal(null);
-      expect(parent4).to.equal(null);
     });
     it('handles an empty tree', () => {
-      const { node, parent } = emptyTree.get(1);
+      const node = emptyTree.get(1);
       expect(node).to.equal(null);
-      expect(parent).to.equal(null);
     });
     it('throws an error for non-numerical values', () => {
       expect(() => sampleTree.get(undefined)).to.throw();
@@ -228,7 +225,7 @@ describe('BinarySearchTree', () => {
         expect(bTree.has(20)).to.equal(true);
         bTree.remove(20);
         expect(bTree.root.left.value).to.equal(10);
-        const { node: node10 } = bTree.get(10);
+        const node10 = bTree.get(10);
         expect(node10.left).to.equal(null);
         expect(node10.right.value).to.equal(25);
         // Remove 70
@@ -236,7 +233,7 @@ describe('BinarySearchTree', () => {
         bTree.remove(70);
         expect(bTree.has(70)).to.equal(false);
         expect(bTree.root.right.value).to.equal(65);
-        const { node: node65 } = bTree.get(65);
+        const node65 = bTree.get(65);
         expect(node65.left.value).to.equal(60);
         expect(node65.right.value).to.equal(80);
       });

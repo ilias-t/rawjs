@@ -6,11 +6,6 @@
 import { isNumber } from 'lodash';
 import BinarySearchTreeNode from './BinarySearchTreeNode';
 
-type getNodeResult = {
-  parent: ?BinarySearchTreeNode,
-  node: ?BinarySearchTreeNode,
-};
-
 class BinarySearchTree {
   root: ?BinarySearchTreeNode;
 
@@ -65,41 +60,40 @@ class BinarySearchTree {
     value: ?number,
     currentNode: ?BinarySearchTreeNode = this.root,
     parentNode: ?BinarySearchTreeNode = null
-  ): getNodeResult => {
+  ): ?BinarySearchTreeNode => {
     this._checkInputIsValid(value);
-    const emptyResult = { node: null, parent: null };
 
     if (!currentNode) {
       // Tree is empty
-      return emptyResult;
+      return null;
     }
 
     const { left, right, value: currentValue } = currentNode;
     if (value < currentValue) {
       if (!left) {
         // Value not found
-        return emptyResult;
+        return null;
       }
       // Keep searching to the left recursively
       return this.get(value, left, currentNode);
     } else if (value > currentValue) {
       if (!right) {
         // Value not found
-        return emptyResult;
+        return null;
       }
       // Keep searching to the right recursively
       return this.get(value, right, currentNode);
     }
     // Values are equal
-    return { node: currentNode, parent: parentNode };
+    currentNode.parent = parentNode;
+    return currentNode;
   };
 
   /**
    * Returns whether or not the tree contains a specific value.
    */
   has = (value: number): boolean => {
-    const { node } = this.get(value);
-    return !!node;
+    return !!this.get(value);
   };
 
   /**
@@ -144,11 +138,12 @@ class BinarySearchTree {
   ): ?BinarySearchTreeNode => {
     this._checkInputIsValid(value);
     // Get the node with the value
-    const { parent, node } = this.get(value, currentNode);
+    const node = this.get(value, currentNode);
     if (!node) {
       // No node was found with that value
       return null;
     }
+    const { parent } = node;
     // Determine if node is to the left or right child of its parent
     const nodeIsLeftChild = (parent && parent.left === node) || null;
     // Helper function to ensure parent references the correct node after removal
