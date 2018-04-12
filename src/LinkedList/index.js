@@ -4,7 +4,7 @@
  */
 
 import { isNumber } from 'lodash';
-import LinkedListNode from './LinkedListNode';
+import LinkedListNode from '../private/LinkedListNode';
 
 class LinkedList {
   head: ?LinkedListNode;
