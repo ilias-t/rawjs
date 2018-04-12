@@ -4,6 +4,8 @@
 
 Common data structures in Javascript. These are the raw ingredients that can comprise more complex programming recipes! Find documentation [here](http://www.iliastsangaris.com/rawjs/).
 
+`yarn add rawjs`
+
 ## Committing
 
 First find or create a ticket on Github. Assign yourself to it, clone down the project, and `yarn install`. Submit a PR to close that ticket.
