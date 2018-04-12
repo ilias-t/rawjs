@@ -4,7 +4,7 @@
 
 Common data structures in Javascript. These are the raw ingredients that can comprise more complex programming recipes! Find documentation [here](http://www.iliastsangaris.com/rawjs/).
 
-`yarn add raw-js`
+`yarn add rawwjs`
 
 ## Committing
 
