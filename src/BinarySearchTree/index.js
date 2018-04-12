@@ -143,30 +143,15 @@ class BinarySearchTree {
       // No node was found with that value
       return null;
     }
-    const { parent } = node;
-    // Determine if node is to the left or right child of its parent
-    const nodeIsLeftChild = (parent && parent.left === node) || null;
-    // Helper function to ensure parent references the correct node after removal
-    const reorientParent = (replacementNode: ?BinarySearchTreeNode): void => {
-      if (parent) {
-        if (nodeIsLeftChild) {
-          parent.left = replacementNode;
-        } else {
-          parent.right = replacementNode;
-        }
-      } else {
-        this.root = replacementNode;
-      }
-    };
     // First, check if node has no children
     if (!node.left && !node.right) {
-      reorientParent(null);
+      this._transplant(node, null);
       return node;
     }
     // Second, check if node to remove has only one child
     if ((!node.left && node.right) || (node.left && !node.right)) {
       const replacementNode = node.left || node.right;
-      reorientParent(replacementNode);
+      this._transplant(node, replacementNode);
       return node;
     }
     /*
@@ -184,8 +169,25 @@ class BinarySearchTree {
     if (node.right !== replacementNode) {
       replacementNode.right = node.right;
     }
-    reorientParent(replacementNode);
+    this._transplant(node, replacementNode);
     return node;
+  };
+
+  _transplant = (
+    existingNode: BinarySearchTreeNode,
+    replacementNode: ?BinarySearchTreeNode
+  ): void => {
+    const { parent } = existingNode;
+    const nodeIsLeftChild = (parent && parent.left === existingNode) || null;
+    if (parent) {
+      if (nodeIsLeftChild) {
+        parent.left = replacementNode;
+      } else {
+        parent.right = replacementNode;
+      }
+    } else {
+      this.root = replacementNode;
+    }
   };
 
   _checkInputIsValid = (value: any) => {
