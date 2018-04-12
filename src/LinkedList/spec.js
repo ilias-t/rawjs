@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import LinkedList from './';
-import LinkedListNode from './LinkedListNode';
+import LinkedListNode from '../private/LinkedListNode';
 
 describe('LinkedList', () => {
   let list;

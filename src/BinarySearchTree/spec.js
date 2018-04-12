@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import BinarySearchTree from './';
-import BinarySearchTreeNode from './BinarySearchTreeNode';
+import BinarySearchTreeNode from '../private/BinarySearchTreeNode';
 
 describe('BinarySearchTree', () => {
   let sampleTree;

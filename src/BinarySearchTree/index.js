@@ -4,7 +4,7 @@
  */
 
 import { isNumber } from 'lodash';
-import BinarySearchTreeNode from './BinarySearchTreeNode';
+import BinarySearchTreeNode from '../private/BinarySearchTreeNode';
 
 class BinarySearchTree {
   root: ?BinarySearchTreeNode;
