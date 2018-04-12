@@ -1,5 +1,5 @@
 {
-  "name": "raw",
+  "name": "rawjs",
   "version": "1.0.0",
   "description": "Data structures in JS",
   "main": "./dist/index.js",
