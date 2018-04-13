@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 ## Unreleased
 
-## 2.0.0 - TBD
+## 2.0.0 - 2018-04-13
 ### Features
 N/A
 
