@@ -43,6 +43,17 @@
                 
                 <div class='toggle-target display-none'>
                   
+                  <ul class='list-reset py1-ul pl1'>
+                    <li class='h5'><span>Static members</span></li>
+                    
+                      <li><a
+                        href='#binarysearchtreecheckkeyisvalid'
+                        class='regular pre-open'>
+                        .checkKeyIsValid
+                      </a></li>
+                    
+                    </ul>
+                  
                   
                     <ul class='list-reset py1-ul pl1'>
                       <li class='h5'><span>Instance members</span></li>
@@ -93,12 +104,6 @@
                         href='#binarysearchtree_transplant'
                         class='regular pre-open'>
                         #_transplant
-                      </a></li>
-                      
-                      <li><a
-                        href='#binarysearchtree_checkinputisvalid'
-                        class='regular pre-open'>
-                        #_checkInputIsValid
                       </a></li>
                       
                     </ul>
@@ -228,6 +233,12 @@
                       <li class='h5'><span>Instance members</span></li>
                       
                       <li><a
+                        href='#binarysearchtreenodekey'
+                        class='regular pre-open'>
+                        #key
+                      </a></li>
+                      
+                      <li><a
                         href='#binarysearchtreenodevalue'
                         class='regular pre-open'>
                         #value
@@ -355,6 +366,70 @@
   
 
   
+    <div class='py1 quiet mt1 prose-big'>Static Members</div>
+    <div class="clearfix">
+  
+    <div class='border-bottom' id='binarysearchtreecheckkeyisvalid'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>checkKeyIsValid(key)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>checkKeyIsValid(key: any)</div>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>key</span> <code class='quiet'>(any)</code>
+	    
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+</div>
+
+  
 
   
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
@@ -378,7 +453,7 @@
   
     <p>
       Type:
-      <a href="#binarysearchtreenode">BinarySearchTreeNode</a>?
+      TTreeNode?
     </p>
   
   
@@ -414,7 +489,7 @@
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>insert</span>
+            <span class='code strong strong truncate'>insert(key, value, currentNode)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -422,10 +497,11 @@
 
   
 
-  <p>Inserts a value into the tree, in the correct position.</p>
+  <p>Inserts a key with the provided value into the tree. If the key is already present
+it will replace the old value with the new one.</p>
 
 
-  <div class='pre p1 fill-light mt0'>insert</div>
+  <div class='pre p1 fill-light mt0'>insert(key: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, value: any, currentNode: TTreeNode?): <a href="#binarysearchtree">BinarySearchTree</a></div>
   
   
 
@@ -442,7 +518,7 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
 	    
           </div>
           
@@ -450,7 +526,16 @@
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>currentNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>?
+            <span class='code bold'>value</span> <code class='quiet'>(any
+            = <code>null</code>)</code>
+	    
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>currentNode</span> <code class='quiet'>(TTreeNode?
             = <code>this.root</code>)</code>
 	    
           </div>
@@ -487,7 +572,7 @@
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>get</span>
+            <span class='code strong strong truncate'>get(key, currentNode, parentNode)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -495,11 +580,11 @@
 
   
 
-  <p>Attempts to find the node with the value provided and return a result containing
+  <p>Attempts to find the node with the key provided and return a result containing
 both the node and its parent.</p>
 
 
-  <div class='pre p1 fill-light mt0'>get</div>
+  <div class='pre p1 fill-light mt0'>get(key: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, currentNode: TTreeNode?, parentNode: TTreeNode?): TTreeNode?</div>
   
   
 
@@ -516,7 +601,7 @@ both the node and its parent.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?)</code>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
 	    
           </div>
           
@@ -524,7 +609,7 @@ both the node and its parent.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>currentNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>?
+            <span class='code bold'>currentNode</span> <code class='quiet'>(TTreeNode?
             = <code>this.root</code>)</code>
 	    
           </div>
@@ -533,7 +618,7 @@ both the node and its parent.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>parentNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>?
+            <span class='code bold'>parentNode</span> <code class='quiet'>(TTreeNode?
             = <code>null</code>)</code>
 	    
           </div>
@@ -548,7 +633,7 @@ both the node and its parent.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#binarysearchtreenode">BinarySearchTreeNode</a>?</code>
+      <code>TTreeNode?</code>
     
   
 
@@ -570,7 +655,7 @@ both the node and its parent.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>has</span>
+            <span class='code strong strong truncate'>has(key)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -581,7 +666,7 @@ both the node and its parent.</p>
   <p>Returns whether or not the tree contains a specific value.</p>
 
 
-  <div class='pre p1 fill-light mt0'>has</div>
+  <div class='pre p1 fill-light mt0'>has(key: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
   
   
 
@@ -598,7 +683,7 @@ both the node and its parent.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
 	    
           </div>
           
@@ -634,7 +719,7 @@ both the node and its parent.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>min</span>
+            <span class='code strong strong truncate'>min(currentNode)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -642,11 +727,10 @@ both the node and its parent.</p>
 
   
 
-  <p>Attempts to find node with the minimum value in the tree and return a result
-containing both the node and its parent.</p>
+  <p>Attempts to find node with the min key in the tree.</p>
 
 
-  <div class='pre p1 fill-light mt0'>min</div>
+  <div class='pre p1 fill-light mt0'>min(currentNode: TTreeNode?): TTreeNode?</div>
   
   
 
@@ -663,7 +747,7 @@ containing both the node and its parent.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>currentNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>?
+            <span class='code bold'>currentNode</span> <code class='quiet'>(TTreeNode?
             = <code>this.root</code>)</code>
 	    
           </div>
@@ -678,7 +762,7 @@ containing both the node and its parent.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#binarysearchtreenode">BinarySearchTreeNode</a>?</code>
+      <code>TTreeNode?</code>
     
   
 
@@ -700,7 +784,7 @@ containing both the node and its parent.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>max</span>
+            <span class='code strong strong truncate'>max(currentNode)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -708,11 +792,10 @@ containing both the node and its parent.</p>
 
   
 
-  <p>Attempts to find node with the maximum value in the tree and return a result
-containing both the node and its parent.</p>
+  <p>Attempts to find node with the max key in the tree.</p>
 
 
-  <div class='pre p1 fill-light mt0'>max</div>
+  <div class='pre p1 fill-light mt0'>max(currentNode: TTreeNode?): TTreeNode?</div>
   
   
 
@@ -729,7 +812,7 @@ containing both the node and its parent.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>currentNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>?
+            <span class='code bold'>currentNode</span> <code class='quiet'>(TTreeNode?
             = <code>this.root</code>)</code>
 	    
           </div>
@@ -744,7 +827,7 @@ containing both the node and its parent.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#binarysearchtreenode">BinarySearchTreeNode</a>?</code>
+      <code>TTreeNode?</code>
     
   
 
@@ -766,7 +849,7 @@ containing both the node and its parent.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>remove</span>
+            <span class='code strong strong truncate'>remove(key, currentNode)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -774,11 +857,11 @@ containing both the node and its parent.</p>
 
   
 
-  <p>Attempts to remove the node with the specified value. It will return null if no
-node is found with that value.</p>
+  <p>Attempts to remove the node with the specified key. It will return null if no
+node is found with that key.</p>
 
 
-  <div class='pre p1 fill-light mt0'>remove</div>
+  <div class='pre p1 fill-light mt0'>remove(key: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, currentNode: TTreeNode?): TTreeNode?</div>
   
   
 
@@ -795,7 +878,7 @@ node is found with that value.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>value</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>?)</code>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
 	    
           </div>
           
@@ -803,7 +886,7 @@ node is found with that value.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>currentNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>?
+            <span class='code bold'>currentNode</span> <code class='quiet'>(TTreeNode?
             = <code>this.root</code>)</code>
 	    
           </div>
@@ -818,7 +901,7 @@ node is found with that value.</p>
   
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
-      <code><a href="#binarysearchtreenode">BinarySearchTreeNode</a>?</code>
+      <code>TTreeNode?</code>
     
   
 
@@ -840,7 +923,7 @@ node is found with that value.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>_transplant</span>
+            <span class='code strong strong truncate'>_transplant(existingNode, replacementNode)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -850,7 +933,7 @@ node is found with that value.</p>
 
   
 
-  <div class='pre p1 fill-light mt0'>_transplant</div>
+  <div class='pre p1 fill-light mt0'>_transplant(existingNode: TTreeNode, replacementNode: TTreeNode?): void</div>
   
   
 
@@ -867,7 +950,7 @@ node is found with that value.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>existingNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>)</code>
+            <span class='code bold'>existingNode</span> <code class='quiet'>(TTreeNode)</code>
 	    
           </div>
           
@@ -875,7 +958,7 @@ node is found with that value.</p>
       
         <div class='space-bottom0'>
           <div>
-            <span class='code bold'>replacementNode</span> <code class='quiet'>(<a href="#binarysearchtreenode">BinarySearchTreeNode</a>?)</code>
+            <span class='code bold'>replacementNode</span> <code class='quiet'>(TTreeNode?)</code>
 	    
           </div>
           
@@ -891,64 +974,6 @@ node is found with that value.</p>
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code>void</code>
     
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-</section>
-
-      </div>
-    </div>
-  
-    <div class='border-bottom' id='binarysearchtree_checkinputisvalid'>
-      <div class="clearfix small pointer toggle-sibling">
-        <div class="py1 contain">
-            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>_checkInputIsValid</span>
-        </div>
-      </div>
-      <div class="clearfix display-none toggle-target">
-        <section class='p2 mb2 clearfix bg-white minishadow'>
-
-  
-
-  
-
-  <div class='pre p1 fill-light mt0'>_checkInputIsValid</div>
-  
-  
-
-  
-  
-  
-  
-  
-  
-
-  
-    <div class='py1 quiet mt1 prose-big'>Parameters</div>
-    <div class='prose'>
-      
-        <div class='space-bottom0'>
-          <div>
-            <span class='code bold'>value</span> <code class='quiet'>(any)</code>
-	    
-          </div>
-          
-        </div>
-      
-    </div>
-  
-
-  
-
   
 
   
@@ -1121,7 +1146,7 @@ node is found with that value.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>insert</span>
+            <span class='code strong strong truncate'>insert(value, node)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1132,7 +1157,7 @@ node is found with that value.</p>
   <p>Inserts the value into a node at the end of the list, recursively.</p>
 
 
-  <div class='pre p1 fill-light mt0'>insert</div>
+  <div class='pre p1 fill-light mt0'>insert(value: any, node: <a href="#linkedlistnode">LinkedListNode</a>?): <a href="#linkedlist">LinkedList</a></div>
   
   
 
@@ -1194,7 +1219,7 @@ node is found with that value.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>insertAt</span>
+            <span class='code strong strong truncate'>insertAt(value, position)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1205,7 +1230,7 @@ node is found with that value.</p>
   <p>Inserts the value into a node with a specific position in the list.</p>
 
 
-  <div class='pre p1 fill-light mt0'>insertAt</div>
+  <div class='pre p1 fill-light mt0'>insertAt(value: any, position: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="#linkedlist">LinkedList</a></div>
   
   
 
@@ -1266,7 +1291,7 @@ node is found with that value.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>insertFirst</span>
+            <span class='code strong strong truncate'>insertFirst(value)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1277,7 +1302,7 @@ node is found with that value.</p>
   <p>Inserts the value into a node at the beginning of the list, as the head.</p>
 
 
-  <div class='pre p1 fill-light mt0'>insertFirst</div>
+  <div class='pre p1 fill-light mt0'>insertFirst(value: any): <a href="#linkedlist">LinkedList</a></div>
   
   
 
@@ -1330,7 +1355,7 @@ node is found with that value.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>get</span>
+            <span class='code strong strong truncate'>get(value)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1341,7 +1366,7 @@ node is found with that value.</p>
   <p>Returns the first node with a value matching that provided.</p>
 
 
-  <div class='pre p1 fill-light mt0'>get</div>
+  <div class='pre p1 fill-light mt0'>get(value: any): <a href="#linkedlistnode">LinkedListNode</a>?</div>
   
   
 
@@ -1394,7 +1419,7 @@ node is found with that value.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>findAt</span>
+            <span class='code strong strong truncate'>findAt(position)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1405,7 +1430,7 @@ node is found with that value.</p>
   <p>Finds the node located at the provided position.</p>
 
 
-  <div class='pre p1 fill-light mt0'>findAt</div>
+  <div class='pre p1 fill-light mt0'>findAt(position: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): any</div>
   
   
 
@@ -1458,7 +1483,7 @@ node is found with that value.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>positionOf</span>
+            <span class='code strong strong truncate'>positionOf(value)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1470,7 +1495,7 @@ node is found with that value.</p>
 equality comparison and return the index.</p>
 
 
-  <div class='pre p1 fill-light mt0'>positionOf</div>
+  <div class='pre p1 fill-light mt0'>positionOf(value: any): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
   
   
 
@@ -1523,7 +1548,7 @@ equality comparison and return the index.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>deleteAt</span>
+            <span class='code strong strong truncate'>deleteAt(position)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1534,7 +1559,7 @@ equality comparison and return the index.</p>
   <p>Deletes the the first node with the value provided, returning the value deleted.</p>
 
 
-  <div class='pre p1 fill-light mt0'>deleteAt</div>
+  <div class='pre p1 fill-light mt0'>deleteAt(position: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): any</div>
   
   
 
@@ -1587,7 +1612,7 @@ equality comparison and return the index.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>delete</span>
+            <span class='code strong strong truncate'>delete(value)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1598,7 +1623,7 @@ equality comparison and return the index.</p>
   <p>Deletes the the first node with the value provided, returning the value deleted.</p>
 
 
-  <div class='pre p1 fill-light mt0'>delete</div>
+  <div class='pre p1 fill-light mt0'>delete(value: any): any</div>
   
   
 
@@ -1651,7 +1676,7 @@ equality comparison and return the index.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>toArray</span>
+            <span class='code strong strong truncate'>toArray()</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1661,7 +1686,7 @@ equality comparison and return the index.</p>
 
   
 
-  <div class='pre p1 fill-light mt0'>toArray</div>
+  <div class='pre p1 fill-light mt0'>toArray(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>&#x3C;any></div>
   
   
 
@@ -1701,7 +1726,7 @@ equality comparison and return the index.</p>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>_checkIsInBounds</span>
+            <span class='code strong strong truncate'>_checkIsInBounds(num)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -1711,7 +1736,7 @@ equality comparison and return the index.</p>
 
   
 
-  <div class='pre p1 fill-light mt0'>_checkIsInBounds</div>
+  <div class='pre p1 fill-light mt0'>_checkIsInBounds(num: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></div>
   
   
 
@@ -1800,7 +1825,7 @@ equality comparison and return the index.</p>
 
   
 
-  <div class='pre p1 fill-light mt0'>new BinarySearchTreeNode(value: any)</div>
+  <div class='pre p1 fill-light mt0'>new BinarySearchTreeNode(key: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>, value: any)</div>
   
   
 
@@ -1814,6 +1839,14 @@ equality comparison and return the index.</p>
   
     <div class='py1 quiet mt1 prose-big'>Parameters</div>
     <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>key</span> <code class='quiet'>(<a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>)</code>
+	    
+          </div>
+          
+        </div>
       
         <div class='space-bottom0'>
           <div>
@@ -1839,6 +1872,56 @@ equality comparison and return the index.</p>
   
     <div class='py1 quiet mt1 prose-big'>Instance Members</div>
     <div class="clearfix">
+  
+    <div class='border-bottom' id='binarysearchtreenodekey'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>key</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>key</div>
+  
+    <p>
+      Type:
+      <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a>
+    </p>
+  
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
   
     <div class='border-bottom' id='binarysearchtreenodevalue'>
       <div class="clearfix small pointer toggle-sibling">

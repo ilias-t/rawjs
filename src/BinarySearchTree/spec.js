@@ -8,22 +8,24 @@ describe('BinarySearchTree', () => {
   beforeEach(() => {
     sampleBST = new BinarySearchTree();
     sampleBST
-      .insert(2)
-      .insert(1)
-      .insert(3);
+      .insert(2, 'b')
+      .insert(1, 'a')
+      .insert(3, 'c');
     emptyTree = new BinarySearchTree();
   });
 
   describe('get', () => {
-    it('returns the node containing the queried value', () => {
+    it('returns the node containing the queried key', () => {
       const node1 = sampleBST.get(1);
       const node3 = sampleBST.get(3);
       expect(node1).to.be.an.instanceOf(BinarySearchTreeNode);
       expect(node3).to.be.an.instanceOf(BinarySearchTreeNode);
-      expect(node1.value).to.equal(1);
-      expect(node3.value).to.equal(3);
+      expect(node1.key).to.equal(1);
+      expect(node1.value).to.equal('a');
+      expect(node3.key).to.equal(3);
+      expect(node3.value).to.equal('c');
     });
-    it('returns the parent node of the queried value, when present', () => {
+    it('returns the parent node of the queried key, when present', () => {
       const node1 = sampleBST.get(1);
       const node2 = sampleBST.get(2);
       const node3 = sampleBST.get(3);
@@ -31,7 +33,7 @@ describe('BinarySearchTree', () => {
       expect(node1.parent).to.equal(node2);
       expect(node3.parent).to.equal(node2);
     });
-    it('returns null if a value is not present in the tree', () => {
+    it('returns null if the key is not present in the tree', () => {
       const node0 = sampleBST.get(0);
       expect(node0).to.equal(null);
       const node4 = sampleBST.get(4);
@@ -41,7 +43,7 @@ describe('BinarySearchTree', () => {
       const node = emptyTree.get(1);
       expect(node).to.equal(null);
     });
-    it('throws an error for non-numerical values', () => {
+    it('throws an error for non-numerical keys', () => {
       expect(() => sampleBST.get(undefined)).to.throw();
       expect(() => sampleBST.get(null)).to.throw();
       expect(() => sampleBST.get(true)).to.throw();
@@ -52,18 +54,18 @@ describe('BinarySearchTree', () => {
   });
 
   describe('has', () => {
-    it('returns true if a value is present in the tree', () => {
+    it('returns true if a key is present in the tree', () => {
       expect(sampleBST.has(1)).to.equal(true);
       expect(sampleBST.has(3)).to.equal(true);
     });
-    it('returns false if a value is not present in the tree', () => {
+    it('returns false if a key is not present in the tree', () => {
       expect(sampleBST.has(0)).to.equal(false);
       expect(sampleBST.has(4)).to.equal(false);
     });
     it('handles an empty tree', () => {
       expect(emptyTree.has(1)).to.equal(false);
     });
-    it('throws an error for non-numerical values', () => {
+    it('throws an error for non-numerical keys', () => {
       expect(() => sampleBST.has(undefined)).to.throw();
       expect(() => sampleBST.has(null)).to.throw();
       expect(() => sampleBST.has(true)).to.throw();
@@ -90,18 +92,19 @@ describe('BinarySearchTree', () => {
     it('returns itself to allow for method chaining', () => {
       expect(sampleBST.insert(4)).to.equal(sampleBST);
     });
-    it('Does not insert the value if already present', () => {
-      expect(() => sampleBST.insert(1)).to.not.throw();
+    it('Does not insert the key if already present', () => {
+      sampleBST.insert(1, 'z');
+      expect(sampleBST.get(1).value).to.equal('z');
     });
   });
 
   describe('min', () => {
-    it('returns the minimum value contained in the tree', () => {
+    it('returns the min key in the tree', () => {
       const min = sampleBST.min();
       expect(min).to.be.an.instanceOf(BinarySearchTreeNode);
-      expect(min.value).to.equal(1);
+      expect(min.key).to.equal(1);
       sampleBST.insert(0);
-      expect(sampleBST.min().value).to.equal(0);
+      expect(sampleBST.min().key).to.equal(0);
     });
     it('handles an empty tree', () => {
       expect(emptyTree.min()).to.equal(null);
@@ -109,12 +112,12 @@ describe('BinarySearchTree', () => {
   });
 
   describe('max', () => {
-    it('returns the maximum value contained in the tree', () => {
+    it('returns the max key in the tree', () => {
       const max = sampleBST.max();
       expect(max).to.be.an.instanceOf(BinarySearchTreeNode);
-      expect(max.value).to.equal(3);
+      expect(max.key).to.equal(3);
       sampleBST.insert(4);
-      expect(sampleBST.max().value).to.equal(4);
+      expect(sampleBST.max().key).to.equal(4);
     });
     it('handles an empty tree', () => {
       expect(emptyTree.max()).to.equal(null);
@@ -133,7 +136,7 @@ describe('BinarySearchTree', () => {
       // Removed node is returned
       const removedNode = sampleBST.remove(1);
       expect(removedNode).to.be.an.instanceOf(BinarySearchTreeNode);
-      expect(removedNode.value).to.equal(1);
+      expect(removedNode.key).to.equal(1);
     });
     it('throws an error for non-numerical values', () => {
       expect(() => sampleBST.remove(undefined)).to.throw();
@@ -150,8 +153,8 @@ describe('BinarySearchTree', () => {
         sampleBST.remove(1);
         expect(sampleBST.has(1)).to.equal(false);
         // State is updated correctly
-        expect(sampleBST.root.value).to.equal(2);
-        expect(sampleBST.root.right.value).to.equal(3);
+        expect(sampleBST.root.key).to.equal(2);
+        expect(sampleBST.root.right.key).to.equal(3);
         expect(sampleBST.root.left).to.equal(null);
       });
       it('removes a right node and updates the state correctly', () => {
@@ -160,8 +163,8 @@ describe('BinarySearchTree', () => {
         sampleBST.remove(3);
         expect(sampleBST.has(3)).to.equal(false);
         // State is updated correctly
-        expect(sampleBST.root.value).to.equal(2);
-        expect(sampleBST.root.left.value).to.equal(1);
+        expect(sampleBST.root.key).to.equal(2);
+        expect(sampleBST.root.left.key).to.equal(1);
         expect(sampleBST.root.right).to.equal(null);
       });
     });
@@ -187,10 +190,10 @@ describe('BinarySearchTree', () => {
       it('removes the node and updates the state correctly', () => {
         expect(bst.has(20)).to.equal(true);
         bst.remove(20);
-        expect(bst.root.left.value).to.equal(25);
+        expect(bst.root.left.key).to.equal(25);
         expect(bst.has(70)).to.equal(true);
         bst.remove(70);
-        expect(bst.root.right.value).to.equal(60);
+        expect(bst.root.right.key).to.equal(60);
       });
     });
 
@@ -224,32 +227,32 @@ describe('BinarySearchTree', () => {
         // Remove 20
         expect(bst.has(20)).to.equal(true);
         bst.remove(20);
-        expect(bst.root.left.value).to.equal(10);
+        expect(bst.root.left.key).to.equal(10);
         const node10 = bst.get(10);
         expect(node10.left).to.equal(null);
-        expect(node10.right.value).to.equal(25);
+        expect(node10.right.key).to.equal(25);
         // Remove 70
         expect(bst.has(70)).to.equal(true);
         bst.remove(70);
         expect(bst.has(70)).to.equal(false);
-        expect(bst.root.right.value).to.equal(65);
+        expect(bst.root.right.key).to.equal(65);
         const node65 = bst.get(65);
-        expect(node65.left.value).to.equal(60);
-        expect(node65.right.value).to.equal(80);
+        expect(node65.left.key).to.equal(60);
+        expect(node65.right.key).to.equal(80);
       });
     });
 
     it('allows a root to be removed', () => {
-      expect(sampleBST.root.value).to.equal(2);
+      expect(sampleBST.root.key).to.equal(2);
       // Remove root
       const node2 = sampleBST.remove(2);
       // The node removed is returned
       expect(node2).to.be.an.instanceOf(BinarySearchTreeNode);
-      expect(node2.value).to.equal(2);
+      expect(node2.key).to.equal(2);
       // Keep removing the roots
-      expect(sampleBST.root.value).to.equal(1);
+      expect(sampleBST.root.key).to.equal(1);
       sampleBST.remove(1);
-      expect(sampleBST.root.value).to.equal(3);
+      expect(sampleBST.root.key).to.equal(3);
       // Ensure it works when removing the final root
       sampleBST.remove(3);
       expect(sampleBST.root).to.equal(null);
