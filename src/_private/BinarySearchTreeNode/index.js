@@ -16,4 +16,4 @@ class BinarySearchTreeNode {
   }
 }
 
-export default BinarySearchTreeNode;
+export { BinarySearchTreeNode as default };

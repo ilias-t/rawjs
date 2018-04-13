@@ -4,10 +4,16 @@
  */
 
 import { isNumber } from 'lodash';
-import BinarySearchTreeNode from '../private/BinarySearchTreeNode';
+import BinarySearchTreeNode from '../_private/BinarySearchTreeNode';
 
 class BinarySearchTree {
-  root: ?BinarySearchTreeNode;
+  root: ?TTreeNode;
+
+  static checkInputIsValid(value: any) {
+    if (!isNumber(value)) {
+      throw new Error('Binary search tree only supports numerical values');
+    }
+  }
 
   constructor() {
     this.root = null;
@@ -16,11 +22,8 @@ class BinarySearchTree {
   /**
    * Inserts a value into the tree, in the correct position.
    */
-  insert = (
-    value: number,
-    currentNode: ?BinarySearchTreeNode = this.root
-  ): BinarySearchTree => {
-    this._checkInputIsValid(value);
+  insert(value: number, currentNode: ?TTreeNode = this.root): BinarySearchTree {
+    BinarySearchTree.checkInputIsValid(value);
     // Node to insert
     const node = new BinarySearchTreeNode(value);
     if (!currentNode) {
@@ -50,18 +53,18 @@ class BinarySearchTree {
     }
     // Don't do anything as values are equal
     return this;
-  };
+  }
 
   /**
    * Attempts to find the node with the value provided and return a result containing
    * both the node and its parent.
    */
-  get = (
+  get(
     value: ?number,
-    currentNode: ?BinarySearchTreeNode = this.root,
-    parentNode: ?BinarySearchTreeNode = null
-  ): ?BinarySearchTreeNode => {
-    this._checkInputIsValid(value);
+    currentNode: ?TTreeNode = this.root,
+    parentNode: ?TTreeNode = null
+  ): ?TTreeNode {
+    BinarySearchTree.checkInputIsValid(value);
 
     if (!currentNode) {
       // Tree is empty
@@ -87,20 +90,20 @@ class BinarySearchTree {
     // Values are equal
     currentNode.parent = parentNode;
     return currentNode;
-  };
+  }
 
   /**
    * Returns whether or not the tree contains a specific value.
    */
-  has = (value: number): boolean => {
+  has(value: number): boolean {
     return !!this.get(value);
-  };
+  }
 
   /**
    * Attempts to find node with the minimum value in the tree and return a result
    * containing both the node and its parent.
    */
-  min = (currentNode: ?BinarySearchTreeNode = this.root): ?BinarySearchTreeNode => {
+  min(currentNode: ?TTreeNode = this.root): ?TTreeNode {
     if (!currentNode) {
       // Tree is empty
       return null;
@@ -110,13 +113,13 @@ class BinarySearchTree {
       return currentNode;
     }
     return this.min(left);
-  };
+  }
 
   /**
    * Attempts to find node with the maximum value in the tree and return a result
    * containing both the node and its parent.
    */
-  max = (currentNode: ?BinarySearchTreeNode = this.root): ?BinarySearchTreeNode => {
+  max(currentNode: ?TTreeNode = this.root): ?TTreeNode {
     if (!currentNode) {
       // Tree is empty
       return null;
@@ -126,17 +129,14 @@ class BinarySearchTree {
       return currentNode;
     }
     return this.max(right);
-  };
+  }
 
   /**
    * Attempts to remove the node with the specified value. It will return null if no
    * node is found with that value.
    */
-  remove = (
-    value: ?number,
-    currentNode: ?BinarySearchTreeNode = this.root
-  ): ?BinarySearchTreeNode => {
-    this._checkInputIsValid(value);
+  remove(value: ?number, currentNode: ?TTreeNode = this.root): ?TTreeNode {
+    BinarySearchTree.checkInputIsValid(value);
     // Get the node with the value
     const node = this.get(value, currentNode);
     if (!node) {
@@ -156,7 +156,7 @@ class BinarySearchTree {
     }
     /*
      * Lastly, determine the node has two children. Deterministically always choose to
-     * replace from the left side.
+     * prioritize replacing from the left side.
      */
     const replacementNode =
       this.max(node.left) || this.min(node.right) || new BinarySearchTreeNode();
@@ -171,12 +171,9 @@ class BinarySearchTree {
     }
     this._transplant(node, replacementNode);
     return node;
-  };
+  }
 
-  _transplant = (
-    existingNode: BinarySearchTreeNode,
-    replacementNode: ?BinarySearchTreeNode
-  ): void => {
+  _transplant(existingNode: TTreeNode, replacementNode: ?TTreeNode): void {
     const { parent } = existingNode;
     const nodeIsLeftChild = (parent && parent.left === existingNode) || null;
     if (parent) {
@@ -188,13 +185,7 @@ class BinarySearchTree {
     } else {
       this.root = replacementNode;
     }
-  };
-
-  _checkInputIsValid = (value: any) => {
-    if (!isNumber(value)) {
-      throw new Error('Binary search tree only supports numerical values');
-    }
-  };
+  }
 }
 
-export default BinarySearchTree;
+export { BinarySearchTree as default };

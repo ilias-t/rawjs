@@ -4,7 +4,7 @@
  */
 
 import { isNumber } from 'lodash';
-import LinkedListNode from '../private/LinkedListNode';
+import LinkedListNode from '../_private/LinkedListNode';
 
 class LinkedList {
   head: ?LinkedListNode;
@@ -18,7 +18,7 @@ class LinkedList {
   /**
    * Inserts the value into a node at the end of the list, recursively.
    */
-  insert = (value: any, node: ?LinkedListNode = this.head): LinkedList => {
+  insert(value: any, node: ?LinkedListNode = this.head): LinkedList {
     if (node == null) {
       this.head = new LinkedListNode(value);
       this.length += 1;
@@ -32,12 +32,12 @@ class LinkedList {
     }
 
     return this.insert(value, node.next);
-  };
+  }
 
   /**
    * Inserts the value into a node with a specific position in the list.
    */
-  insertAt = (value: any, position: number): LinkedList => {
+  insertAt(value: any, position: number): LinkedList {
     this._checkIsInBounds(position);
     // new node to be inserted
     const node = new LinkedListNode(value);
@@ -53,19 +53,19 @@ class LinkedList {
     }
     this.length += 1;
     return this;
-  };
+  }
 
   /**
    * Inserts the value into a node at the beginning of the list, as the head.
    */
-  insertFirst = (value: any): LinkedList => {
+  insertFirst(value: any): LinkedList {
     return this.insertAt(value, 0);
-  };
+  }
 
   /**
    * Returns the first node with a value matching that provided.
    */
-  get = (value: any): ?LinkedListNode => {
+  get(value: any): ?LinkedListNode {
     let current = this.head;
     for (let i = 0; i < this.length; i++) {
       if (current && current.value === value) {
@@ -74,12 +74,12 @@ class LinkedList {
       current = current && current.next;
     }
     return null;
-  };
+  }
 
   /**
    * Finds the node located at the provided position.
    */
-  findAt = (position: number): any => {
+  findAt(position: number): any {
     this._checkIsInBounds(position);
 
     let current = this.head;
@@ -87,13 +87,13 @@ class LinkedList {
       current = current && current.next;
     }
     return current;
-  };
+  }
 
   /**
    * Search the list for the first node containing the value provided using a strict
    * equality comparison and return the index.
    */
-  positionOf = (value: any): number => {
+  positionOf(value: any): number {
     let current = this.head;
     for (let i = 0; i < this.length; i++) {
       if (current && current.value === value) {
@@ -102,12 +102,12 @@ class LinkedList {
       current = current && current.next;
     }
     return -1;
-  };
+  }
 
   /**
    * Deletes the the first node with the value provided, returning the value deleted.
    */
-  deleteAt = (position: number): any => {
+  deleteAt(position: number): any {
     if (this.head == null) {
       // Cannot delete from an empty list
       return null;
@@ -127,21 +127,21 @@ class LinkedList {
     prev.next = target.next;
     this.length -= 1;
     return target.value;
-  };
+  }
 
   /**
    * Deletes the the first node with the value provided, returning the value deleted.
    */
-  delete = (value: any): any => {
+  delete(value: any): any {
     try {
       const position = this.positionOf(value);
       return this.deleteAt(position);
     } catch (e) {
       return null;
     }
-  };
+  }
 
-  toArray = (): any[] => {
+  toArray(): any[] {
     const array = [];
     if (this.head == null) {
       return array;
@@ -152,9 +152,9 @@ class LinkedList {
       current = current && current.next;
     }
     return array;
-  };
+  }
 
-  _checkIsInBounds = (num: number): boolean => {
+  _checkIsInBounds(num: number): boolean {
     if (!isNumber(num)) {
       throw new Error('Provided position is invalid');
     }
@@ -162,7 +162,7 @@ class LinkedList {
       throw new Error('Provided position is out of bounds');
     }
     return true;
-  };
+  }
 }
 
-export default LinkedList;
+export { LinkedList as default };

@@ -12,4 +12,4 @@ class LinkedListNode {
   }
 }
 
-export default LinkedListNode;
+export { LinkedListNode as default };
