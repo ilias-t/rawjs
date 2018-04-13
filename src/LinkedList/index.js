@@ -165,4 +165,4 @@ class LinkedList {
   }
 }
 
-export { LinkedList as default };
+export default LinkedList;

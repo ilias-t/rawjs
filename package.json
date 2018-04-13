@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "npm run verification && babel src --out-dir dist",
-    "docs": "documentation build --config documentation.yml --document-exported src/*/* -f html -o docs",
+    "docs": "documentation build --config documentation.yml --document-exported src/**/* -f html -o docs",
     "format": "prettier --write '**/*.js'",
     "lint": "eslint ./src",
     "prepublish": "npm run build",
