@@ -1,6 +1,6 @@
 {
   "name": "rawwjs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Data structures in JS",
   "main": "./dist/index.js",
   "author": "Ilias Tsangaris",
@@ -10,7 +10,7 @@
   },
   "scripts": {
     "build": "npm run verification && babel src --out-dir dist",
-    "docs": "documentation build --config documentation.yml --document-exported src/*/* -f html -o docs",
+    "docs": "documentation build --config documentation.yml --document-exported src/**/* -f html -o docs",
     "format": "prettier --write '**/*.js'",
     "lint": "eslint ./src",
     "prepublish": "npm run build",

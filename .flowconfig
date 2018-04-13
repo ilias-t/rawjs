@@ -4,5 +4,7 @@
 [include]
 
 [libs]
+./flow
 
 [options]
+module.name_mapper='^\(.*\)' -> './src/\1'
