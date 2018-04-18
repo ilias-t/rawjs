@@ -13,7 +13,7 @@
     "docs": "documentation build --config documentation.yml --document-exported src/**/* -f html -o docs",
     "format": "prettier --write '**/*.js'",
     "lint": "eslint ./src",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "test": "nyc mocha --opts .mocharc",
     "test:watch": "npm run test -- --watch",
     "verification": "npm run lint && npm run test && flow"
